@@ -1,0 +1,15 @@
+version: '3'
+services:
+  app:
+    build: ./docker/web
+    ports:
+      - 80:80
+    volumes:
+      - ./app:/var/www/app
+    working_dir: /var/www/app
+  db:
+    build: ./docker/dba
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/dba/my.cnf:/etc/mysql/conf.d/my.cnf
