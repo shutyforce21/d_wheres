@@ -1,9 +1,11 @@
 FROM php:8.0-apache
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY ./site-available/*.conf /etc/apache2/sites-enabled/
 RUN apt-get update && apt-get install -y \
     git \
     && docker-php-ext-install pdo_mysql
 
 COPY ./php.ini /usr/local/etc/php/php.ini
 
-RUN sed -i 's!/var/www/html!/var/www/app/public!g' /etc/apache2/sites-available/000-default.conf
+RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled
+RUN /bin/sh -c a2enmod rewrite
