@@ -21,9 +21,12 @@
             padding: 0;
             }
         </style>
-        
+        <div>
+        </div>
         <div id="map"></div>
-        
+        <article id='asdf'>
+
+        </article>
         <script>
             mapboxgl.accessToken = 'pk.eyJ1Ijoic2h1dHlmb3JjZSIsImEiOiJja3c3dG1ja3YxdHN6MnZtbjlobHdpYmU0In0.CUgXUng_QUDPiDEGKnRQQw';
             const geojson = {
@@ -33,7 +36,7 @@
                         'type': 'Feature',
                         'properties': {
                         'message': 'Foo',
-                        'iconSize': [60, 60]
+                        'iconSize': [35, 35]
                     },
                         'geometry': {
                             'type': 'Point',
@@ -43,7 +46,7 @@
                         'type': 'Feature',
                         'properties': {
                         'message': 'Bar',
-                        'iconSize': [50, 50]
+                        'iconSize': [35, 35]
                     },
                         'geometry': {
                             'type': 'Point',
@@ -54,7 +57,7 @@
                         'type': 'Feature',
                         'properties': {
                             'message': 'Baz',
-                            'iconSize': [40, 40]
+                            'iconSize': [35, 35]
                         },
                         'geometry': {
                             'type': 'Point',
@@ -74,14 +77,16 @@
             // Add markers to the map.
             for (const marker of geojson.features) {
                 // Create a DOM element for each marker.
-                const el = document.createElement('div');
+                const el = document.createElement('img');
                 const width = marker.properties.iconSize[0];
                 const height = marker.properties.iconSize[1];
                 el.className = 'marker';
-                el.style.backgroundImage = `url(https://placekitten.com/g/${width}/${height}/)`;
+                // el.style.backgroundImage = `url(https://placekitten.com/g/${width}/${height}/)`;
+                el.src = `{{ asset('/image/home/icon/marker.png')}}`;
                 el.style.width = `${width}px`;
                 el.style.height = `${height}px`;
-                el.style.backgroundSize = '100%';
+                el.style.backgroundColor = 'red';
+                // el.style.backgroundSize = '100%';
                 el.addEventListener('click', () => {
                     window.alert(marker.properties.message);
                 });
@@ -89,6 +94,8 @@
                 new mapboxgl.Marker(el)
                 .setLngLat(marker.geometry.coordinates)
                 .addTo(map);
+                // var asdf = document.getElementById('asdf');
+                // asdf.appendChild(el);
             }
         </script>
     </body>
