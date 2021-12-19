@@ -1,5 +1,7 @@
 <?php
 
+use App\Providers\RepositoryServiceProvider;
+
 return [
 
     /*
@@ -176,7 +178,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-
+        //add
+        RepositoryServiceProvider::class
     ],
 
     /*

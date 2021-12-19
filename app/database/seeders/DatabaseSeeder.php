@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        DB::table('users')->insert([
+            [
+                'code' => 'asdf1234',
+                'name' => 'asdf',
+                'email' => 'asdf@asdf.com',
+                'password' => 'Aasdf1234@',
+                'sns_links' => 'asdf'
+            ],
+        ]);
+
+        DB::table('prefectures')->insert([
+            ['name' => '東京'],
+            ['name' => '北海道']
+        ]);
     }
 }

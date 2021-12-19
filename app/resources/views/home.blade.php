@@ -14,11 +14,11 @@
     <body>
         <style>
             .marker {
-            display: block;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            padding: 0;
+                display: block;
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                padding: 0;
             }
         </style>
         <div>
