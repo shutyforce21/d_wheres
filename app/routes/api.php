@@ -20,4 +20,5 @@ Route::resource('/spots', SpotController::class)->only(['store']);
 
 Route::get('a', function () {
 });
- ?>
+?>
+

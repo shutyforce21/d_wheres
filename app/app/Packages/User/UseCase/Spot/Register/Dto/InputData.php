@@ -1,8 +1,9 @@
+
 <?php
 
 namespace App\packages\User\UseCase\Spot\Register\Dto;
 
-class InputData 
+class InputData
 {
     private string $name;
     private $image;
@@ -20,7 +21,7 @@ class InputData
         $content,
         $latitude,
         $longitude
-    ){
+    ) {
         $this->name = $name;
         $this->image = $image;
         $this->prefectureId = $prefectureId;
@@ -30,31 +31,39 @@ class InputData
         $this->longitude = $longitude;
     }
 
-    public function getName(){
+    public function getName()
+    {
         return $this->name;
     }
 
-    public function getImage(){
+    public function getImage()
+    {
         return $this->image;
     }
 
-    public function getPrefectureId(){
+    public function getPrefectureId()
+    {
         return $this->prefectureId;
     }
 
-    public function getAddress() {
+    public function getAddress()
+    {
         return $this->address;
     }
 
-    public function getContent(){
+    public function getContent()
+    {
         return $this->content;
     }
 
-    public function getLatitude(){
+    public function getLatitude()
+    {
         return $this->latitude;
     }
 
-    public function getLongitude(){
+    public function getLongitude()
+    {
         return $this->longitude;
     }
 }
+?>
