@@ -1,5 +1,7 @@
 <?php
-namespace App\packages\User\Domain\Spot\ValueObject;
+
+
+namespace App\Packages\User\Domain\Spot\ValueObject;
 
 use Illuminate\Support\Facades\DB;
 
@@ -30,12 +32,10 @@ class GeometricLocation
 
     /**
      * MySql用ST_GeomFromText関数に通した値を返す
-     * @return void
+     * @return \Illuminate\Database\Query\Expression
      */
     public function getGft() {
-        $point = 'POINT(' . $this->lat . ' ' . $this->lng . ')';
+        $point = 'POINT(' . $this->lng . ' ' . $this->lat . ')';
         return DB::raw('ST_GeomFromText("' . $point . '")');
     }
 }
-
-?>

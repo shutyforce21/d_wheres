@@ -65,7 +65,7 @@ class StoreSpotRequest extends FormRequest
         $name = $this->attributes();
 
         $errors = collect();
-        $errors->push(collect($validator->messages)->map(function ($v, $k) use ($name) {
+        $errors->push(collect($validator->messages())->map(function ($v, $k) use ($name) {
             //配列用に.以前を取得
             $k = explode('.', $k)[0];
             return [

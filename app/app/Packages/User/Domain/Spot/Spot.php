@@ -1,5 +1,8 @@
 <?php
-namespace App\packages\User\Domain\Spot;
+
+
+namespace App\Packages\User\Domain\Spot;
+
 
 use App\packages\User\Domain\Spot\ValueObject\GeometricLocation;
 
@@ -20,7 +23,7 @@ class Spot
         $prefectureId,
         $address,
         $content,
-        $location
+        GeometricLocation $location
     ){
         $self = new self();
         $self->name = $name;
@@ -28,9 +31,7 @@ class Spot
         $self->prefectureId = $prefectureId;
         $self->address = $address;
         $self->content = $content;
-        if ($location instanceof GeometricLocation) {
-            $self->location = $location;
-        }
+        $self->location = $location;
         return $self;
     }
 
@@ -64,5 +65,3 @@ class Spot
         return $this->location;
     }
 }
-
-?>

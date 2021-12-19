@@ -1,11 +1,12 @@
 <?php
-namespace App\packages\User\Infrastructure\Spot;
+
+
+namespace App\Packages\User\Infrastructure\Spot;
+
 
 use App\Models\Spot as SpotModel;
 use App\packages\User\Domain\Spot\Spot;
-use Exception;
 use Illuminate\Support\Facades\DB;
-use Throwable;
 
 class Repository implements RepositoryInterface
 {
@@ -35,13 +36,11 @@ class Repository implements RepositoryInterface
             $this->spotModel->save();
             DB::commit();
 
-        } catch (Throwable $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
             logger()->error($e->getMessage());
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
 }
-
-?>

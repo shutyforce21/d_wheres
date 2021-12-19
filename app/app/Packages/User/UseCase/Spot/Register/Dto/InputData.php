@@ -1,7 +1,7 @@
-
 <?php
 
-namespace App\packages\User\UseCase\Spot\Register\Dto;
+
+namespace App\Packages\User\UseCase\Spot\Register\Dto;
 
 class InputData
 {
@@ -66,4 +66,3 @@ class InputData
         return $this->longitude;
     }
 }
-?>

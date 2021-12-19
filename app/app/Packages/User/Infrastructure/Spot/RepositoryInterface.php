@@ -1,9 +1,12 @@
 <?php
-namespace App\packages\User\Infrastructure\Spot;
+
+
+namespace App\Packages\User\Infrastructure\Spot;
+
 
 use App\packages\User\Domain\Spot\Spot;
 
-interface RepositoryInterface 
+interface RepositoryInterface
 {
 
     /**
@@ -14,5 +17,3 @@ interface RepositoryInterface
      */
     public function save(Spot $spot, $userId);
 }
-
-?>

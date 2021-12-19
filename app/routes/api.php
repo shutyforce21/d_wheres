@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:user', {});
-Route::resource('/spots', SpotController::class)->only(['store']);
+//練習スポット
+Route::resource('/spots', SpotController::class)->only(['index', 'store']);
 
-Route::get('a', function () {
-});
+// 新規登録
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+
 ?>
 
