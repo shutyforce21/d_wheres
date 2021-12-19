@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
                 'name' => 'asdf',
                 'email' => 'asdf@asdf.com',
                 'password' => 'Aasdf1234@',
-                'sns_links' => 'asdf'
             ],
         ]);
 

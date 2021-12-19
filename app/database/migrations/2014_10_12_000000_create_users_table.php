@@ -16,12 +16,18 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('code')->comment('ユーザーID');
-            $table->string('name');
+            $table->string('name')->comment('名前');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('sns_links');
-            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('user_details', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->string('image')->nullable()->comment('イメージ画像');
+            $table->string('profile')->nullable()->comment('プロフィール');
             $table->timestamps();
         });
     }
@@ -33,6 +39,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_details');
         Schema::dropIfExists('users');
     }
 }

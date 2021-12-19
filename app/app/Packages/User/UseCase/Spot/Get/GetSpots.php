@@ -1,8 +1,9 @@
 <?php
 
-namespace App\packages\User\UseCase\Spot\Get;
 
-use App\packages\User\Infrastructure\Spot\ReadRepositoryInterface;
+namespace App\Packages\User\UseCase\Spot\Get;
+
+use App\Packages\User\Infrastructure\Spot\ReadRepositoryInterface;
 
 class GetSpots
 {
@@ -15,6 +16,7 @@ class GetSpots
 
     public function handle()
     {
-        $this->readRepository;
+        $outputData = $this->readRepository->all();
+        return $outputData;
     }
 }
