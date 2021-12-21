@@ -3,7 +3,8 @@
 
 namespace App\Http\Requests;
 
-use App\Packages\User\UseCase\Spot\Register\Dto\InputData;
+use App\Http\Requests\Rule\PasswordValidationRules;
+use App\Packages\User\UseCase\User\Register\Dto\InputData;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -11,6 +12,8 @@ use Illuminate\Http\Response;
 
 class RegisterUserRequest extends FormRequest
 {
+    use PasswordValidationRules;
+
     public function attributes()
     {
         return [
@@ -41,13 +44,10 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'image' => ['nullable', 'image'],
-            'prefecture_id' => ['required', 'exists:prefectures,id'],
-            'address' => ['nullable', 'string'],
-            'content' => ['nullable', 'string', 'max:500'],
-            'location' => ['required', 'array'],
-            'location.latitude' => ['required', 'string'],
-            'location.longitude' => ['required', 'string']
+            'email' => ['required', 'email', 'unique:people' ,'regex:/\A([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\z/ui'],
+            'email_confirmation' => ['required', 'same:email'],
+            'password' => $this->passwordRules(),
+            'password_confirmation' => ['required', 'same:password'],
         ];
     }
 
@@ -87,12 +87,8 @@ class RegisterUserRequest extends FormRequest
         $data = $this->validated();
         $inputData = new InputData(
             $this->spaceTrim($data['name']),
-            $data['image'],
-            $data['prefecture_id'],
-            $data['address'],
-            $this->spaceTrim($data['content']),
-            $data['location']['latitude'],
-            $data['location']['longitude']
+            $this->spaceTrim($data['email']),
+            $data['password']
         );
 
         return $inputData;

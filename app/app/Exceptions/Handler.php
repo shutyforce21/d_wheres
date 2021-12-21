@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -37,5 +38,14 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        // expectsJson()はAjax,Pjaxでアクセスされたら、apiを返す
+        return $request->expectsJson()
+            ? response()->json(['message' => $exception->getMessage()], 401)
+            : response()->json(['message' => $exception->getMessage()], 401);
+//            : redirect()->guest(route('login')); // ここを変更する
     }
 }
