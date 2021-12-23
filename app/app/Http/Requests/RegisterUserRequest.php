@@ -19,7 +19,6 @@ class RegisterUserRequest extends FormRequest
         return [
             'name' => '名前',
             'email' => 'メールアドレス',
-            'email_confirmation' => 'メールアドレス(確認用)',
             'password' => 'パスワード',
             'password_confirmation' => 'パスワード(確認用)',
         ];
@@ -44,8 +43,7 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'email', 'unique:people' ,'regex:/\A([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\z/ui'],
-            'email_confirmation' => ['required', 'same:email'],
+            'email' => ['required', 'email', 'unique:users,email' ,'regex:/\A([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\z/ui'],
             'password' => $this->passwordRules(),
             'password_confirmation' => ['required', 'same:password'],
         ];

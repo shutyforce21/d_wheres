@@ -20,8 +20,18 @@ Route::resource('/spots', SpotController::class)->only(['index', 'store']);
 
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
-Route::get('/a', function () {
-    return response()->json(['messaege' => 'ok'], 200);
+// 新規登録
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+
+Route::middleware('auth:users')->group(function() {
+    Route::get('/u', function (Request $request) {
+        dd(\Illuminate\Support\Facades\Auth::id());
+    });
+});
+
+// CORSを許可
+Route::middleware(['cors'])->group(function () {
+    Route::get('/aa', [\App\Http\Controllers\AuthController::class, 'sample']);
 });
 
 ?>
