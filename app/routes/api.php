@@ -20,6 +20,9 @@ Route::resource('/spots', SpotController::class)->only(['index', 'store']);
 
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+Route::get('/a', function () {
+    return response()->json(['messaege' => 'ok'], 200);
+});
 
 ?>
 
