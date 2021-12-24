@@ -23,11 +23,13 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register
 // 新規登録
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
+// yu-
 Route::middleware('auth:users')->group(function() {
     Route::get('/u', function (Request $request) {
         dd(\Illuminate\Support\Facades\Auth::id());
     });
 });
+
 
 // CORSを許可
 Route::middleware(['cors'])->group(function () {
