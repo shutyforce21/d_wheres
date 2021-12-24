@@ -30,9 +30,9 @@ Route::middleware('auth:users')->group(function() {
 });
 
 // CORSを許可
-Route::middleware(['cors'])->group(function () {
-    Route::get('/aa', [\App\Http\Controllers\AuthController::class, 'sample']);
-});
+//Route::middleware(['cors'])->group(function () {
+    Route::get('/a', [\App\Http\Controllers\AuthController::class, 'sample']);
+//});
 
 ?>
 
