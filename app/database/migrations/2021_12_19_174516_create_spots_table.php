@@ -25,9 +25,15 @@ class CreateSpotsTable extends Migration
             $table->foreignId('prefecture_id')->constrained('prefectures');
             $table->string('address')->comment('住所');
             $table->geometry('location')->comment('緯度・軽度');
-            $table->foreignId('create_user_id')->constrained('users');
+            //TODO 曜日ごとに設定
+            $table->time('open_on')->nullable()->comment('開場時間');
+            $table->time('close_on')->nullable()->comment('閉場時間');
             $table->timestamps();
         });
+
+        // レコード数に応じて有効化
+        // \Illuminate\Support\Facades\DB::statement('ALTER TABLE spots ADD FULLTEXT index spots_name_fulltext_index (`name`) with parser ngram');
+
     }
 
     /**
