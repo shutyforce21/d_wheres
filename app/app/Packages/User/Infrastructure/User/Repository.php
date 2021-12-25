@@ -5,15 +5,23 @@ namespace App\Packages\User\Infrastructure\User;
 
 
 use App\Models\User as UserModel;
+use App\Models\Profile as ProfileModel;
+use App\Packages\User\Domain\User\ChildEntity\Profile;
 use App\Packages\User\Domain\User\User;
+use Illuminate\Support\Facades\DB;
 
 class Repository implements RepositoryInterface
 {
     private $userModel;
+    private $profileModel;
 
-    public function __construct(UserModel $userModel)
+    public function __construct(
+        UserModel $userModel,
+        ProfileModel $profileModel
+    )
     {
         $this->userModel = $userModel;
+        $this->profileModel = $profileModel;
     }
 
     /**
@@ -36,6 +44,61 @@ class Repository implements RepositoryInterface
             logger()->info($throwable->getMessage());
             throw new \Exception($throwable->getMessage());
         }
+    }
 
+    /**
+     * @param $userId
+     * @return User
+     * @throws \Exception
+     */
+    public function findById($userId)
+    {
+        if($userModel = $this->userModel->find($userId)) {
+            $user = User::fromRepository(
+                $userModel->id,
+                $userModel->code,
+                $userModel->name,
+                Profile::fromRepository(
+                    optional($userModel->profile)->image,
+                    optional($userModel->profile)->biography,
+                    optional($userModel->profile)->genres
+                )
+            );
+            return $user;
+
+        } else {
+            throw new \Exception('ユーザーが見つかりませんでした。');
+        }
+    }
+
+    /**
+     * @param User $user
+     * @return bool
+     * @throws \Exception
+     */
+    public function saveProfile(User $user)
+    {
+        DB::beginTransaction();
+        try {
+            $profileModel = new ProfileModel();
+            $profileModel->user_id = $user->getId();
+            $profileModel->image = $user->getProfile()->getImage();
+            $profileModel->biography = $user->getProfile()->getBiography();
+            $profileModel->save();
+
+            $this->userModel
+                ->find($user->getId())
+                ->genres()
+                ->sync($user->getProfile()->getGenres());
+
+            DB::commit();
+            return true;
+
+        } catch (\Throwable $throwable) {
+
+            DB::rollBack();
+            logger()->info($throwable->getMessage());
+            throw new \Exception($throwable->getMessage());
+        }
     }
 }

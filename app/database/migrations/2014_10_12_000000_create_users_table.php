@@ -13,22 +13,34 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        //ジャンル
+        Schema::create('genres', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
+        //ユーザー
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->comment('ユーザーID');
+            $table->string('code')->unique()->comment('ユーザーID');
             $table->string('name')->comment('名前');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->comment('メールアドレス');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
 
-        Schema::create('user_details', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('image')->nullable()->comment('イメージ画像');
-            $table->string('profile')->nullable()->comment('プロフィール');
+            $table->tinyText('biography')->nullable()->comment('自己紹介');
             $table->timestamps();
+        });
+
+        Schema::create('user_genre', function (Blueprint $table) {
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('genre_id')->constrained('genres');
         });
     }
 
@@ -39,7 +51,9 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_details');
+        Schema::dropIfExists('user_genre');
+        Schema::dropIfExists('profiles');
         Schema::dropIfExists('users');
+        Schema::dropIfExists('genres');
     }
 }

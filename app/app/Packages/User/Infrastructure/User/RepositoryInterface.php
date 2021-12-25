@@ -12,4 +12,17 @@ interface RepositoryInterface
      * @throws \Exception
      */
     public function save(User $user);
+
+    /**
+     * @param $userId
+     * @return User
+     * @throws \Exception
+     */
+    public function findById($userId);
+
+    /**
+     * @param User $user
+     * @throws \Exception
+     */
+    public function saveProfile(User $user);
 }

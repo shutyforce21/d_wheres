@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterUserRequest;
+use App\Http\Requests\UserLoginRequest;
 use App\Models\User;
 use App\Packages\User\UseCase\User\Register\RegisterUser;
 use Illuminate\Http\Request;
@@ -35,15 +36,12 @@ class AuthController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request)
+    public function login(UserLoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string'
-        ]);
+        $inputData = $request->getInputData();
 
-        $user = User::where('email', $request->email)->first();
-        if (!$user || !password_verify($request->password, $user->password)) {
+        $user = User::where('email', $inputData->getEmail())->first();
+        if (!$user || !password_verify($inputData->getPassword(), $user->password)) {
             return response()->json(["message" => "メールアドレスまたはパスワードが違います。"],Response::HTTP_NOT_FOUND);
         }
 

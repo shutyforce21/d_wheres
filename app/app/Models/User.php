@@ -30,18 +30,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
-    ];
-
-    /**
      * The attributes that should be cast.
      *
      * @var array
@@ -50,12 +38,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'user_genre');
+    }
 }

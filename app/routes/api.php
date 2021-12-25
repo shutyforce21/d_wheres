@@ -18,11 +18,15 @@ use Illuminate\Support\Facades\Route;
 //練習スポット
 Route::resource('/spots', SpotController::class)->only(['index', 'store']);
 
+
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
-// 新規登録
+// ログイン
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
-
+// プロフィール設定
+Route::post('/profile/store', [\App\Http\Controllers\ProfileController::class, 'store']);
+// プロフィール表示
+Route::post('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
 // yu-
 Route::middleware('auth:users')->group(function() {
     Route::get('/u', function (Request $request) {

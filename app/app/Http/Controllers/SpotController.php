@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSpotRequest;
+use App\Http\Requests\RegisterSpotRequest;
 use App\Http\Resources\SpotResource;
 use App\Packages\User\UseCase\Spot\Get\GetSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
@@ -33,7 +33,7 @@ class SpotController extends Controller
         }
     }
 
-    public function store(StoreSpotRequest $request, RegisterSpot $useCase)
+    public function store(RegisterSpotRequest $request, RegisterSpot $useCase)
     {
         // $userId = Auth::id();
         $userId = 1;

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\InitData\InitDataSeeder;
+use Database\Seeders\SampleData\SampleDataSeeder;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -9,23 +11,18 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     *
      * @return void
      */
     public function run()
     {
-        DB::table('users')->insert([
-            [
-                'code' => 'asdf1234',
-                'name' => 'asdf',
-                'email' => 'asdf@asdf.com',
-                'password' => 'Aasdf1234@',
-            ],
+        $this->call([
+            InitDataSeeder::class
         ]);
 
-        DB::table('prefectures')->insert([
-            ['name' => '東京'],
-            ['name' => '北海道']
-        ]);
+        if (config('app.env') == "local" || config('app.env') == "test" || config('app.env') == "develop") {
+            $this->call([
+                SampleDataSeeder::class
+            ]);
+        }
     }
 }
