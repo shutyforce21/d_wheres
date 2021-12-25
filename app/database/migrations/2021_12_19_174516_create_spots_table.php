@@ -28,6 +28,7 @@ class CreateSpotsTable extends Migration
             //TODO 曜日ごとに設定
             $table->time('open_on')->nullable()->comment('開場時間');
             $table->time('close_on')->nullable()->comment('閉場時間');
+            $table->foreignId('create_user_id')->comment('作成者')->constrained('users');
             $table->timestamps();
         });
 

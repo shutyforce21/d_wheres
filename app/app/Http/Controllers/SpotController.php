@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSpotRequest;
+use App\Http\Resources\SpotResource;
 use App\Packages\User\UseCase\Spot\Get\GetSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
 use Illuminate\Http\Response;
@@ -19,10 +20,10 @@ class SpotController extends Controller
     {
         try {
             $outputData = $useCase->handle();
-//            return response()->json(
-//                ['data' => $outputData],
-//                Response::HTTP_OK
-//            );
+            return response()->json(
+                ['data' => SpotResource::collection($outputData)],
+                Response::HTTP_OK
+            );
 
         } catch(Throwable $e) {
             return response()->json(
