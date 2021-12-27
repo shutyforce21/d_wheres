@@ -41,7 +41,7 @@ class ProfileController extends Controller
 //        $userId = Auth::id();
         try {
             $outputData = $useCase->handle($userId);
-
+            dd($outputData);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK

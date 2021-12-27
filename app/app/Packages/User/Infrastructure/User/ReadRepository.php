@@ -39,7 +39,7 @@ class ReadRepository implements ReadRepositoryInterface
                     optional($userModel->profile)->biography,
                     optional($userModel->genres)->map(function($g) {
                         return $g->id;
-                    })
+                    })->toArray()
                 )
             );
             return $readUser;

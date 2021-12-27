@@ -6,6 +6,8 @@ use App\packages\User\Infrastructure\Spot\Repository as SpotRepository;
 use App\packages\User\Infrastructure\Spot\RepositoryInterface as SpotRepositoryInterface;
 use App\Packages\User\Infrastructure\Spot\ReadRepositoryInterface as SpotReadRepositoryInterface;
 use App\Packages\User\Infrastructure\Spot\ReadRepository as SpotReadRepository;
+use App\Packages\User\Infrastructure\User\ReadRepository as UserReadRepository;
+use App\Packages\User\Infrastructure\User\ReadRepositoryInterface as UserReadRepositoryInterface;
 use App\Packages\User\Infrastructure\User\Repository as UserRepository;
 use App\Packages\User\Infrastructure\User\RepositoryInterface as UserRepositoryInterface;
 use App\Packages\User\Infrastructure\User\FileRepositoryInterface as UserFileRepositoryInterface;
@@ -29,6 +31,8 @@ class RepositoryServiceProvider extends ServiceProvider
         //ユーザー
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(UserFileRepositoryInterface::class, UserFileRepository::class);
+        $this->app->bind(UserReadRepositoryInterface::class, UserReadRepository::class);
+
     }
 
     /**
