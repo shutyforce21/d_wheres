@@ -6,7 +6,6 @@ use App\Http\Resources\SpotResource;
 use App\Packages\User\UseCase\Spot\Get\GetSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class SpotController extends Controller
