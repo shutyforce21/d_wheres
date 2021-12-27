@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+        //プロフィール
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
@@ -42,6 +43,14 @@ class CreateUsersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('genre_id')->constrained('genres');
         });
+
+        //フォロー
+        Schema::create('follows', function (Blueprint $table) {
+            $table->foreignId('follower_id')->constrained('users');
+            $table->foreignId('followed_id')->constrained('users');
+        });
+
+
     }
 
     /**
@@ -51,6 +60,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('follows');
         Schema::dropIfExists('user_genre');
         Schema::dropIfExists('profiles');
         Schema::dropIfExists('users');

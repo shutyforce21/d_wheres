@@ -27,6 +27,7 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 Route::post('/profile/store', [\App\Http\Controllers\ProfileController::class, 'store']);
 // プロフィール表示
 Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
+
 // yu-
 Route::middleware('auth:users')->group(function() {
     Route::get('/u', function (Request $request) {
