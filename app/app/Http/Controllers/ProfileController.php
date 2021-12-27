@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterUserProfileRequest;
 use App\Packages\User\UseCase\User\RegisterProfile\RegisterProfile;
+use App\Packages\User\UseCase\User\ShowProfile\ShowProfile;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,13 +31,16 @@ class ProfileController extends Controller
         }
     }
 
-    public function show(RegisterProfile $useCase)
+    /**
+     * @param ShowProfile $useCase
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(ShowProfile $useCase)
     {
         $userId = 1;
 //        $userId = Auth::id();
         try {
-            $inputData = $request->getInputData();
-            $useCase->handle($inputData, $userId);
+            $outputData = $useCase->handle($userId);
 
             return response()->json(
                 ['message' => 'success'],

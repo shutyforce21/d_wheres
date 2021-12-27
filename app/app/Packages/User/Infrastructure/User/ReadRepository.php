@@ -22,6 +22,11 @@ class ReadRepository implements ReadRepositoryInterface
         $this->profileModel = $profileModel;
     }
 
+    /**
+     * @param $userId
+     * @return ReadUser
+     * @throws \Exception
+     */
     public function findById($userId)
     {
         if ($userModel = $this->userModel->find($userId)) {
