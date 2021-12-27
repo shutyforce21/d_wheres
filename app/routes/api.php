@@ -28,12 +28,14 @@ Route::post('/profile/store', [\App\Http\Controllers\ProfileController::class, '
 // プロフィール表示
 Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
 
-// yu-
-Route::middleware('auth:users')->group(function() {
+// ユーザー
+//Route::middleware('auth:users')->group(function() {
     Route::get('/u', function (Request $request) {
         dd(\Illuminate\Support\Facades\Auth::id());
     });
-});
+    // フォロー
+    Route::put('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
+//});
 
 
 // CORSを許可

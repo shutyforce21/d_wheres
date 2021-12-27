@@ -49,8 +49,6 @@ class CreateUsersTable extends Migration
             $table->foreignId('follower_id')->constrained('users');
             $table->foreignId('followed_id')->constrained('users');
         });
-
-
     }
 
     /**
