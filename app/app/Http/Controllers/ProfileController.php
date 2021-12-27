@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterUserProfileRequest;
+use App\Http\Resources\ProfileResource;
 use App\Packages\User\UseCase\User\RegisterProfile\RegisterProfile;
 use App\Packages\User\UseCase\User\ShowProfile\ShowProfile;
 use Illuminate\Http\Response;
@@ -41,9 +42,8 @@ class ProfileController extends Controller
 //        $userId = Auth::id();
         try {
             $outputData = $useCase->handle($userId);
-            dd($outputData);
             return response()->json(
-                ['message' => 'success'],
+                ['data' => ProfileResource::toArray($outputData)],
                 Response::HTTP_OK
             );
 
