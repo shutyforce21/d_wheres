@@ -34,9 +34,12 @@ Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show'])
         dd(\Illuminate\Support\Facades\Auth::id());
     });
     // フォロー
-    Route::put('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
+    Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
 //});
 
+Route::get('/s', function () {
+
+});
 
 // CORSを許可
 //Route::middleware(['cors'])->group(function () {
