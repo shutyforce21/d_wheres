@@ -12,13 +12,28 @@ class SampleDataSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'code' => 'asdf1001',
-                'name' => 'ダンサー１',
+                'name' => 'ダンサー1',
                 'email' => 'asdf1@asdf.com',
                 'password' => 'password'
             ],[
                 'code' => 'asdf1002',
-                'name' => 'ダンサー２',
+                'name' => 'ダンサー2',
                 'email' => 'asdf2@asdf.com',
+                'password' => 'password'
+            ],[
+                'code' => 'asdf1003',
+                'name' => 'ダンサー3',
+                'email' => 'asdf3@asdf.com',
+                'password' => 'password'
+            ],[
+                'code' => 'asdf1004',
+                'name' => 'ダンサー4',
+                'email' => 'asdf4@asdf.com',
+                'password' => 'password'
+            ],[
+                'code' => 'asdf1005',
+                'name' => 'ダンサー5',
+                'email' => 'asdf5@asdf.com',
                 'password' => 'password'
             ],
         ]);

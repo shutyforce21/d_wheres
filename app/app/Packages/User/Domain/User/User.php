@@ -99,6 +99,9 @@ class User
         if (in_array($followedId, $this->getFollowedIds())) {
             throw new \Exception('既にフォロー済みです。');
 
+        } elseif ($followedId === $this->getId()) {
+            throw new \Exception('自分自信をフォローする事はできません。');
+
         } else {
             $this->newFollowedId = $followedId;
         }
