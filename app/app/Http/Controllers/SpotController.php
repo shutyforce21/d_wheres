@@ -11,7 +11,7 @@ use Throwable;
 class SpotController extends Controller
 {
     /**
-     * ログインしていれば、誰がいるかとか、場所の詳細を確認できる。
+     * (メモ) ログインしていれば、誰がいるかとか、場所の詳細を確認できる。
      * @param GetSpots $useCase
      * @return \Illuminate\Http\JsonResponse
      */

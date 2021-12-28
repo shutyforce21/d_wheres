@@ -17,7 +17,7 @@ class UserController extends Controller
     public function follow($followedId, FollowUser $useCase)
     {
 //        $followerId = Auth::id();
-        $followerId = 2;
+        $followerId = 1;
 
         try {
             $useCase->handle($followerId, $followedId);
@@ -33,4 +33,15 @@ class UserController extends Controller
             );
         }
     }
+
+    /**
+     * spotに向かう
+     */
+    public function goToSpot(){}
+
+    /**
+     * spotにいる
+     */
+    public function nowInSpot(){}
+
 }
