@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    /**
+     * @param RegisterUserProfileRequest $request
+     * @param RegisterProfile $useCase
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(RegisterUserProfileRequest $request, RegisterProfile $useCase)
     {
         $userId = 1;

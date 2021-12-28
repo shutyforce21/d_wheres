@@ -25,4 +25,11 @@ interface RepositoryInterface
      * @throws \Exception
      */
     public function saveProfile(User $user);
+
+    /**
+     * @param User $user
+     * @return bool
+     * @throws \Exception
+     */
+    public function follow(User $user);
 }

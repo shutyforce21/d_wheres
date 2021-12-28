@@ -64,6 +64,12 @@ class Repository implements RepositoryInterface
                     optional($userModel->profile)->genres
                 )
             );
+            
+            $followedIds = optional($userModel->follows)->map(function($user) {
+                return $user->id;
+            })->toArray();
+            $user->setFollowedIds($followedIds);
+
             return $user;
 
         } else {
@@ -99,6 +105,30 @@ class Repository implements RepositoryInterface
             DB::rollBack();
             logger()->info($throwable->getMessage());
             throw new \Exception($throwable->getMessage());
+        }
+    }
+
+
+    /**
+     * @param User $user
+     * @return bool
+     * @throws \Exception
+     */
+    public function follow(User $user)
+    {
+        if ($userModel = $this->userModel->find($user->getId())) {
+            try {
+                $userModel->follows()->attach($user->getNewFollowedId());
+                return true;
+
+            } catch (\Throwable $throwable) {
+
+                logger()->info($throwable->getMessage());
+                throw new \Exception($throwable->getMessage());
+            }
+
+        } else {
+            throw new \Exception('ユーザーが見つかりませんでした。');
         }
     }
 }

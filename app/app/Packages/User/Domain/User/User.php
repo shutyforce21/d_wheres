@@ -14,6 +14,8 @@ class User
     private string $email;
     private Password $password;
     private Profile $profile;
+    private ?array $followedIds = [];
+    private ?int $newFollowedId;
 
     private function __construct(){}
 
@@ -45,6 +47,27 @@ class User
         $self->name = $name;
         $self->profile = $profile;
         return $self;
+    }
+
+    /**
+     * @param $followedId
+     */
+    public function follow($followedId)
+    {
+        if (in_array($followedId, $this->getFollowedIds())) {
+            throw new \Exception('既にフォロー済みです。');
+
+        } else {
+            $this->newFollowedId = $followedId;
+        }
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getNewFollowedId()
+    {
+        return $this->newFollowedId;
     }
 
     /**
@@ -106,5 +129,21 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * @param array|null $followedIds
+     */
+    public function setFollowedIds($followedIds)
+    {
+        $this->followedIds = $followedIds;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getFollowedIds()
+    {
+        return $this->followedIds;
     }
 }
