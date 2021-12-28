@@ -64,7 +64,7 @@ class Repository implements RepositoryInterface
                     optional($userModel->profile)->genres
                 )
             );
-            
+
             $followedIds = optional($userModel->follows)->map(function($user) {
                 return $user->id;
             })->toArray();

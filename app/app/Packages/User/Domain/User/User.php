@@ -19,6 +19,14 @@ class User
 
     private function __construct(){}
 
+    /**
+     * //新規生成ルート
+     * @param $code
+     * @param $name
+     * @param $email
+     * @param Password $password
+     * @return User
+     */
     public static function reconstruct(
         $code,
         $name,
@@ -34,6 +42,14 @@ class User
         return $self;
     }
 
+    /**
+     * repositoryから生成ルート
+     * @param $id
+     * @param $code
+     * @param $name
+     * @param Profile $profile
+     * @return User
+     */
     public static function fromRepository(
         $id,
         $code,
@@ -50,7 +66,33 @@ class User
     }
 
     /**
+     * profileエンティティ
+     * @param $profile
+     * @throws \Exception
+     */
+    public function setProfile($profile)
+    {
+        if ($profile instanceof Profile) {
+            $this->profile = $profile;
+
+        } else {
+            throw new \Exception('インスタンスが違います。');
+        }
+    }
+
+    /**
+     * フォローユーザーのIds
+     * @param $followedIds
+     */
+    public function setFollowedIds($followedIds)
+    {
+        $this->followedIds = $followedIds;
+    }
+
+    /**
+     * ユーザーをフォローする
      * @param $followedId
+     * @throws \Exception
      */
     public function follow($followedId)
     {
@@ -63,24 +105,12 @@ class User
     }
 
     /**
+     * フォローしたユーザーIDを取得する
      * @return int|null
      */
     public function getNewFollowedId()
     {
         return $this->newFollowedId;
-    }
-
-    /**
-     * @param Profile $profile
-     */
-    public function setProfile($profile)
-    {
-        if ($profile instanceof Profile) {
-            $this->profile = $profile;
-
-        } else {
-            throw new \Exception('インスタンスが違います。');
-        }
     }
 
     /**
@@ -129,14 +159,6 @@ class User
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * @param array|null $followedIds
-     */
-    public function setFollowedIds($followedIds)
-    {
-        $this->followedIds = $followedIds;
     }
 
     /**
