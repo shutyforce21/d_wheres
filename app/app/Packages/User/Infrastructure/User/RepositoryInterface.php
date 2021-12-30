@@ -8,7 +8,7 @@ interface RepositoryInterface
 {
     /**
      * @param User $user
-     * @return mixed
+     * @return mixed|void
      * @throws \Exception
      */
     public function save(User $user);

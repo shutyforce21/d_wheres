@@ -26,7 +26,7 @@ class Repository implements RepositoryInterface
 
     /**
      * @param User $user
-     * @return mixed
+     * @return mixed|void
      * @throws \Exception
      */
     public function save(User $user)
@@ -37,8 +37,6 @@ class Repository implements RepositoryInterface
             $this->userModel->email = $user->getEmail();
             $this->userModel->password = $user->getPassword();
             $this->userModel->save();
-
-            return $this->userModel->id;
 
         } catch (\Throwable $throwable) {
             logger()->info($throwable->getMessage());

@@ -5,7 +5,7 @@ namespace App\Packages\User\Domain\User;
 
 
 use App\Packages\Shared\Service\UniqueCode;
-use App\Packages\User\Domain\User\ValueIObject\Password;
+use App\Packages\User\Domain\User\ValueObject\Password;
 use App\Packages\User\UseCase\User\Register\Dto\InputData;
 
 class UserFactory

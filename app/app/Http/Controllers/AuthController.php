@@ -20,9 +20,9 @@ class AuthController extends Controller
     {
         $inputData = $request->getInputData();
         try {
-            $outputData = $useCase->handle($inputData);
+            $useCase->handle($inputData);
             return response()->json(
-                ['message' => $outputData],
+                ['message' => 'success'],
                 Response::HTTP_OK);
 
         } catch (\Throwable $throwable) {
@@ -48,11 +48,13 @@ class AuthController extends Controller
         $token = $user->createToken('my-app-token')->plainTextToken;
 
         return response()->json([
-            //権限でログイン時の画面を切り分ける
-            'user_id' => $user->id,
-            'name' => $user->name,
-            'code' => $user->code,
-            'token' => $token
+            'message' => 'success',
+            'data' => [
+                'user_id' => $user->id,
+                'name' => $user->name,
+                'code' => $user->code,
+                'token' => $token
+            ]
         ], Response::HTTP_OK);
     }
 

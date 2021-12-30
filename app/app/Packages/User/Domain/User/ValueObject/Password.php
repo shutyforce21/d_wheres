@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Packages\User\Domain\User\ValueIObject;
+namespace App\Packages\User\Domain\User\ValueObject;
 
 use Illuminate\Support\Facades\Hash;
 

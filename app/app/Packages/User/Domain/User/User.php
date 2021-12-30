@@ -4,7 +4,7 @@
 namespace App\Packages\User\Domain\User;
 
 use App\Packages\User\Domain\User\ChildEntity\Profile;
-use App\Packages\User\Domain\User\ValueIObject\Password;
+use App\Packages\User\Domain\User\ValueObject\Password;
 
 class User
 {
@@ -20,7 +20,7 @@ class User
     private function __construct(){}
 
     /**
-     * //新規生成ルート
+     * 新規生成ルート
      * @param $code
      * @param $name
      * @param $email
@@ -38,7 +38,7 @@ class User
         $self->code = $code;
         $self->name = $name;
         $self->email = $email;
-        $self->password = $password->getHashedPassword();
+        $self->password = $password;
         return $self;
     }
 
@@ -161,7 +161,7 @@ class User
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->password->getHashedPassword();
     }
 
     /**

@@ -74,7 +74,7 @@ class RegisterUserRequest extends FormRequest
             throw new HttpResponseException(
                 response()->json([
                     'message' => 'Validation Error',
-                    'errors' => $errors->toArray()
+                    'errors' => $errors[0]
                 ], Response::HTTP_BAD_REQUEST)
             );
         }

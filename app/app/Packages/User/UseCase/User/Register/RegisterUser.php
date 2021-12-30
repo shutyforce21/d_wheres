@@ -17,10 +17,13 @@ class RegisterUser
         $this->repository = $repository;
     }
 
+    /**
+     * @param InputData $inputData
+     * @throws \Exception
+     */
     public function handle(InputData $inputData)
     {
         $userEntity = UserFactory::create($inputData);
-        $userId = $this->repository->save($userEntity);
-        return $userId;
+        $this->repository->save($userEntity);
     }
 }
