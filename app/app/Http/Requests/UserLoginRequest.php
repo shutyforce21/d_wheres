@@ -39,7 +39,7 @@ class UserLoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'email', 'unique:users,email' ,'regex:/\A([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\z/ui'],
+            'email' => ['required', 'string', 'exists:users,email' ,'regex:/\A([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\z/ui'],
             'password' => ['required', 'string'],
         ];
     }
@@ -63,7 +63,7 @@ class UserLoginRequest extends FormRequest
                 'name' => collect($name)->get($k),
                 'message' => collect($v)->first()
             ];
-        })->values()->toArray());
+        })->values()->toArray()[0]);
         if ($errors->isNotEmpty()) {
             throw new HttpResponseException(
                 response()->json([

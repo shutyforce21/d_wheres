@@ -29,13 +29,13 @@ Route::post('/profile/store', [\App\Http\Controllers\ProfileController::class, '
 Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
 
 // ユーザー
-//Route::middleware('auth:users')->group(function() {
-    Route::get('/u', function (Request $request) {
-        dd(\Illuminate\Support\Facades\Auth::id());
-    });
+Route::group(['prefix' => 'user', 'middleware' => 'auth:users'], function() {
+    //tokenが認証済みかどうか(api通信が無いページ用)
+    Route::get('/is_authenticated', [\App\Http\Controllers\AuthController::class, 'isAuthenticated']);
     // フォロー
     Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
-//});
+});
+
 
 Route::get('/s', function () {
 

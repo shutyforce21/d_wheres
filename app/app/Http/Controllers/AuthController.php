@@ -58,6 +58,16 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
+    /**
+     * tokenが認証済みかどうか
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function isAuthenticated() {
+        return response()->json(
+            ['message' => 'success'],
+            Response::HTTP_OK);
+    }
+
     public function sample(Request $request) {
         return response()->json(
             ['messaege' => 'ok'],
