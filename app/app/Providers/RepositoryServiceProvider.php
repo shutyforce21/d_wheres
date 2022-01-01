@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Packages\User\Infrastructure\Spot\FileRepository as SpotFileRepository;
+use App\Packages\User\Infrastructure\Spot\FileRepositoryInterface as SpotFileRepositoryInterface;
 use App\packages\User\Infrastructure\Spot\Repository as SpotRepository;
 use App\packages\User\Infrastructure\Spot\RepositoryInterface as SpotRepositoryInterface;
 use App\Packages\User\Infrastructure\Spot\ReadRepositoryInterface as SpotReadRepositoryInterface;
@@ -27,6 +29,7 @@ class RepositoryServiceProvider extends ServiceProvider
         //練習場所
         $this->app->bind(SpotRepositoryInterface::class, SpotRepository::class);
         $this->app->bind(SpotReadRepositoryInterface::class, SpotReadRepository::class);
+        $this->app->bind(SpotFileRepositoryInterface::class, SpotFileRepository::class);
 
         //ユーザー
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
