@@ -37,6 +37,21 @@ class SampleDataSeeder extends Seeder
                 'password' => 'password'
             ],
         ]);
+
+//        DB::table('spots')->insert([
+//            [
+//                'name' => '池袋駅東口',
+//                'image' => 'storage/'
+//                'prefecture_id'
+//                'address'
+//                'location'
+//                'open_on'
+//                'close_on'
+//                'create_user_id'
+//            ],[
+//
+//            ]
+//        ]);
     }
 
 }

@@ -20,6 +20,7 @@ class CreateSpotsTable extends Migration
 
         Schema::create('spots', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->comment('コード');
             $table->string('name')->comment('名前');
             $table->string('image')->nullable()->comment('イメージ');
             $table->foreignId('prefecture_id')->constrained('prefectures');
