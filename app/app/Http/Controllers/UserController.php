@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function index(Request $request) {
+
+    }
+
     /**
      * @param $followedId
      * @param FollowUser $useCase

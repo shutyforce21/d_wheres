@@ -26,16 +26,22 @@ class Profile
     }
 
     public static function reconstruct(
-        $image,
         $biography,
         $genres
     )
     {
         $self = new self();
-        $self->image = $image;
         $self->biography = $biography;
         $self->genres = $genres;
         return $self;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
     /**

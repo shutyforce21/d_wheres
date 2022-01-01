@@ -30,20 +30,26 @@ class RegisterProfile
      */
     public function handle(InputData $inputData, $userId)
     {
+        //userEntityを呼び出す
         $userEntity = $this->repository->findById($userId);
-
-        $imgPath = $this->fileRepository->saveProfileImg(
-            $inputData->getImage(),
-            $userEntity->getCode()
-        );
-
+        //profileEntityを作成
         $profile = Profile::reconstruct(
-            $imgPath,
             $inputData->getBiography(),
             $inputData->getGenres()
         );
-        $userEntity->setProfile($profile);
 
+        if ($inputData->getImage()) {
+            //imageがあればrepositoryで保存し、pathを返却
+            $imgPath = $this->fileRepository->saveProfileImg(
+                $inputData->getImage(),
+                $userEntity->getCode()
+            );
+            //profileEntityにpathをセット
+            $profile->setImage($imgPath);
+        }
+        //userEntityにprofileEntityをセット
+        $userEntity->setProfile($profile);
+        //保存
         $this->repository->saveProfile($userEntity);
     }
 
