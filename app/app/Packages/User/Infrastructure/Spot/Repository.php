@@ -27,11 +27,14 @@ class Repository implements RepositoryInterface
     {
         DB::beginTransaction();
         try {
+            $this->spotModel->code = $spot->getCode();
             $this->spotModel->name = $spot->getName();
             $this->spotModel->image = $spot->getImage();
             $this->spotModel->prefecture_id = $spot->getPrefectureId();
             $this->spotModel->address = $spot->getAddress();
             $this->spotModel->location = $spot->getLocation()->getGft();
+            $this->spotModel->open_on = $spot->getAvailableTime()->getOpenOn();
+            $this->spotModel->close_on = $spot->getAvailableTime()->getCloseOn();
             $this->spotModel->create_user_id = $userId;
             $this->spotModel->save();
             DB::commit();

@@ -8,10 +8,12 @@ class InputData
     private string $name;
     private $image;
     private int $prefectureId;
-    private string $address;
+    private ?string $address;
     private ?string $content;
     private string $latitude;
     private string $longitude;
+    private ?string $openOn;
+    private ?string $closeOn;
 
     public function __construct(
         $name,
@@ -20,7 +22,9 @@ class InputData
         $address,
         $content,
         $latitude,
-        $longitude
+        $longitude,
+        $openOn,
+        $closeOn
     ) {
         $this->name = $name;
         $this->image = $image;
@@ -29,40 +33,79 @@ class InputData
         $this->content = $content;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
+        $this->openOn = $openOn;
+        $this->closeOn = $closeOn;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @return mixed
+     */
     public function getImage()
     {
         return $this->image;
     }
 
-    public function getPrefectureId()
-    {
-        return $this->prefectureId;
-    }
-
+    /**
+     * @return string|null
+     */
     public function getAddress()
     {
         return $this->address;
     }
 
+    /**
+     * @return int
+     */
+    public function getPrefectureId()
+    {
+        return $this->prefectureId;
+    }
+
+    /**
+     * @return string|null
+     */
     public function getContent()
     {
         return $this->content;
     }
 
+    /**
+     * @return string
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return string
+     */
     public function getLatitude()
     {
         return $this->latitude;
     }
 
-    public function getLongitude()
+    /**
+     * @return string|null
+     */
+    public function getOpenOn()
     {
-        return $this->longitude;
+        return $this->openOn;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCloseOn()
+    {
+        return $this->closeOn;
     }
 }

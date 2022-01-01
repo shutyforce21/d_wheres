@@ -21,6 +21,9 @@ class RegisterSpotRequest extends FormRequest
             'location' => '緯度・経度',
             'location.latitude' => '緯度',
             'location.longitude' => '経度',
+            'open_on' => '開場時間',
+            'close_on' => '閉場時間'
+
         ];
     }
 
@@ -49,7 +52,9 @@ class RegisterSpotRequest extends FormRequest
             'content' => ['nullable', 'string', 'max:500'],
             'location' => ['required', 'array'],
             'location.latitude' => ['required', 'string'],
-            'location.longitude' => ['required', 'string']
+            'location.longitude' => ['required', 'string'],
+            'open_on' => ['nullable', 'string'],
+            'close_on' => ['nullable', 'string']
         ];
     }
 
@@ -84,6 +89,9 @@ class RegisterSpotRequest extends FormRequest
         }
     }
 
+    /**
+     * @return InputData
+     */
     public function getInputData()
     {
         $data = $this->validated();
@@ -94,7 +102,9 @@ class RegisterSpotRequest extends FormRequest
             $data['address'],
             $this->spaceTrim($data['content']),
             $data['location']['latitude'],
-            $data['location']['longitude']
+            $data['location']['longitude'],
+            $data['open_on'],
+            $data['close_on']
         );
 
         return $inputData;

@@ -4,35 +4,57 @@
 namespace App\Packages\User\Domain\Spot;
 
 
+use App\Packages\User\Domain\Spot\ValueObject\AvailableTime;
 use App\packages\User\Domain\Spot\ValueObject\GeometricLocation;
 
 class Spot
 {
+    private string $code;
     private string $name;
     private ?string $image;
     private int $prefectureId;
     private string $address;
     private ?string $content;
     private GeometricLocation $location;
+    private AvailableTime $availableTime;
 
     private function __construct(){}
 
     public static function reconstruct(
+        $code,
         $name,
-        $image,
         $prefectureId,
         $address,
         $content,
-        GeometricLocation $location
+        GeometricLocation $location,
+        AvailableTime $availableTime
     ){
         $self = new self();
+        $self->code = $code;
         $self->name = $name;
-        $self->image = $image;
+        $self->image = null;
         $self->prefectureId = $prefectureId;
         $self->address = $address;
         $self->content = $content;
         $self->location = $location;
+        $self->availableTime = $availableTime;
         return $self;
+    }
+
+    /**
+     * @param string|null $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     public function getName()
@@ -63,5 +85,13 @@ class Spot
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * @return AvailableTime
+     */
+    public function getAvailableTime()
+    {
+        return $this->availableTime;
     }
 }
