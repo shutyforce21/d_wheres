@@ -33,6 +33,7 @@ class Repository implements RepositoryInterface
             $this->spotModel->prefecture_id = $spot->getPrefectureId();
             $this->spotModel->address = $spot->getAddress();
             $this->spotModel->location = $spot->getLocation()->getGft();
+            $this->spotModel->content = $spot->getContent();
             $this->spotModel->open_on = $spot->getAvailableTime()->getOpenOn();
             $this->spotModel->close_on = $spot->getAvailableTime()->getCloseOn();
             $this->spotModel->create_user_id = $userId;

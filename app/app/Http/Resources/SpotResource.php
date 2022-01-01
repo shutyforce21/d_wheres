@@ -16,11 +16,16 @@ class SpotResource
     {
         return [
             'id' => $spot->getId(),
+            'code' => $spot->getCode(),
             'name' => $spot->getName(),
             'image' => $spot->getImage(),
             'location' => [
                 'latitude' => $spot->getLocation()->getLat(),
                 'longitude' => $spot->getLocation()->getLng()
+            ],
+            'available_time' => [
+                'open_on' => $spot->getAvailableTime()->getOpenOn(),
+                'close_on' => $spot->getAvailableTime()->getCloseOn(),
             ]
         ];
     }

@@ -3,34 +3,41 @@
 namespace App\Packages\User\Domain\Spot\ReadModel;
 
 
+use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadAvailableTime;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadLocation;
 
 class ReadSpot
 {
     private int $id;
+    private string $code;
     private string $name;
     private ?string $image;
     private int $prefectureId;
     private string $address;
     private ?string $content;
     private ReadLocation $location;
+    private ReadAvailableTime $availableTime;
 
     public function __construct(
         $id,
+        $code,
         $name,
         $image,
         $prefectureId,
         $address,
         $content,
-        ReadLocation $location
+        ReadLocation $location,
+        ReadAvailableTime $availableTime
     ) {
         $this->id = $id;
+        $this->code = $code;
         $this->name = $name;
         $this->image = $image;
         $this->prefectureId = $prefectureId;
         $this->address = $address;
         $this->content = $content;
         $this->location = $location;
+        $this->availableTime = $availableTime;
     }
 
     /**
@@ -39,6 +46,14 @@ class ReadSpot
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 
     /**
@@ -87,6 +102,14 @@ class ReadSpot
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * @return ReadAvailableTime
+     */
+    public function getAvailableTime()
+    {
+        return $this->availableTime;
     }
 }
 

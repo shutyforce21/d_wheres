@@ -25,6 +25,7 @@ class CreateSpotsTable extends Migration
             $table->string('image')->nullable()->comment('イメージ');
             $table->foreignId('prefecture_id')->constrained('prefectures');
             $table->string('address')->comment('住所');
+            $table->text('content')->comment('備考');
             $table->geometry('location')->comment('緯度・軽度');
             //TODO 曜日ごとに設定
             $table->time('open_on')->nullable()->comment('開場時間');

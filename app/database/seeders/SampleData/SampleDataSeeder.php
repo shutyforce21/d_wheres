@@ -38,20 +38,86 @@ class SampleDataSeeder extends Seeder
             ],
         ]);
 
-//        DB::table('spots')->insert([
-//            [
-//                'name' => '池袋駅東口',
-//                'image' => 'storage/'
-//                'prefecture_id'
-//                'address'
-//                'location'
-//                'open_on'
-//                'close_on'
-//                'create_user_id'
-//            ],[
-//
-//            ]
-//        ]);
+        DB::table('spots')->insert([
+            [
+                'code' => 'asdfasdf12341234',
+                'name' => '池袋駅東口1',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 1,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ],[
+                'code' => 'asdfasdf123412341',
+                'name' => '池袋駅東口2',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 2,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ],[
+                'code' => 'asdfasdf123412342',
+                'name' => '池袋駅東口3',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 1,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ],[
+                'code' => 'asdfasdf123412343',
+                'name' => '池袋駅東口4',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 2,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ],[
+                'code' => 'asdfasdf123412344',
+                'name' => '池袋駅東口5',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 1,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ],[
+                'code' => 'asdfasdf123412345',
+                'name' => '池袋駅東口6',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 2,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ],[
+                'code' => 'asdfasdf123412346',
+                'name' => '池袋駅東口7',
+                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'prefecture_id' => 1,
+                'address' => '東京都池袋1-2-1',
+                'content' => '内容内容',
+                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'open_on' => '12:23:45',
+                'close_on' => '12:23:45',
+                'create_user_id' => 1
+            ]
+        ]);
     }
 
 }

@@ -6,6 +6,7 @@ namespace App\Packages\User\Infrastructure\Spot;
 
 use App\Models\Spot as SpotModel;
 use App\Packages\User\Domain\Spot\ReadModel\ReadSpot;
+use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadAvailableTime;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadLocation;
 
 class ReadRepository implements ReadRepositoryInterface
@@ -25,13 +26,14 @@ class ReadRepository implements ReadRepositoryInterface
         $rows = $this->spotModel->selectRaw(
             "ST_X(location) as lng, " .
             "ST_Y(location) as lat, " .
-            "id, name, image, prefecture_id, address"
+            "id, code, name, image, code, prefecture_id, address, open_on, close_on"
         )->get();
 
         if ($rows->isNotEmpty()) {
             foreach ($rows as $r) {
                 $spots[] = new ReadSpot(
                     $r->id,
+                    $r->code,
                     $r->name,
                     $r->image,
                     $r->prefecture_id,
@@ -40,6 +42,10 @@ class ReadRepository implements ReadRepositoryInterface
                     new ReadLocation(
                         $r->lat,
                         $r->lng
+                    ),
+                    new ReadAvailableTime(
+                        $r->open_on,
+                        $r->close_on
                     )
                 );
             }
