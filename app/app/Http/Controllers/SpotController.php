@@ -20,7 +20,10 @@ class SpotController extends Controller
         try {
             $outputData = $useCase->handle();
             return response()->json(
-                ['data' => SpotResource::collection($outputData)],
+                [
+                    'message' => 'success',
+                    'data' => SpotResource::collection($outputData)
+                ],
                 Response::HTTP_OK
             );
 
