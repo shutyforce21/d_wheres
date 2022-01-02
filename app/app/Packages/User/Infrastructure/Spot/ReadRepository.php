@@ -5,6 +5,7 @@ namespace App\Packages\User\Infrastructure\Spot;
 
 
 use App\Models\Spot as SpotModel;
+use App\Packages\Shared\Service\ImagePath;
 use App\Packages\User\Domain\Spot\ReadModel\ReadSpot;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadAvailableTime;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadLocation;
@@ -35,7 +36,7 @@ class ReadRepository implements ReadRepositoryInterface
                     $r->id,
                     $r->code,
                     $r->name,
-                    $r->image,
+                    ImagePath::getAbsolutePath($r->image),
                     $r->prefecture_id,
                     $r->address,
                     $r->content,
