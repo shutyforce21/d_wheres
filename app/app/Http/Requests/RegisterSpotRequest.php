@@ -23,7 +23,6 @@ class RegisterSpotRequest extends FormRequest
             'location.longitude' => '経度',
             'open_on' => '開場時間',
             'close_on' => '閉場時間'
-
         ];
     }
 
