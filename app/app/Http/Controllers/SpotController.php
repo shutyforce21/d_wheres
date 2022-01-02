@@ -35,6 +35,11 @@ class SpotController extends Controller
         }
     }
 
+    /**
+     * @param RegisterSpotRequest $request
+     * @param RegisterSpot $useCase
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store(RegisterSpotRequest $request, RegisterSpot $useCase)
     {
         // $userId = Auth::id();
@@ -53,6 +58,11 @@ class SpotController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    public function show($spotId)
+    {
+
     }
 }
 

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             InitDataSeeder::class
         ]);
 
-        if (config('app.env') == "local" || config('app.env') == "test" || config('app.env') == "develop") {
+        if (config('app.env') == "local" || config('app.env') == "testing" || config('app.env') == "develop") {
             $this->call([
                 SampleDataSeeder::class
             ]);
