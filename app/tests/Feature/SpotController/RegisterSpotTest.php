@@ -22,7 +22,7 @@ class RegisterSpotTest extends TestCase
             '/api/user/login',
             ['email' => 'asdf1@asdf.com', 'password' => 'password']
         );
-        
+
         $authToken = $loginResponse->getOriginalContent()['data']['token'];
         $this->authToken = $authToken;
     }

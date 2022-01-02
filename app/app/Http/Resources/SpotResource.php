@@ -12,13 +12,33 @@ class SpotResource
      * @param ReadSpot $spot
      * @return array
      */
-    public static function toArray(ReadSpot $spot)
+    public static function toArrayForPart(ReadSpot $spot)
+    {
+        return [
+            'id' => $spot->getId(),
+            'name' => $spot->getName(),
+            'image' => $spot->getImage(),
+            'available_time' => [
+                'open_on' => $spot->getAvailableTime()->getOpenOn(),
+                'close_on' => $spot->getAvailableTime()->getCloseOn(),
+            ]
+        ];
+    }
+
+    /**
+     * @param ReadSpot $spot
+     * @return array
+     */
+    public static function toArrayForDetail(ReadSpot $spot)
     {
         return [
             'id' => $spot->getId(),
             'code' => $spot->getCode(),
             'name' => $spot->getName(),
             'image' => $spot->getImage(),
+            'prefecture_id' => $spot->getPrefectureId(),
+            'address' => $spot->getAddress(),
+            'content' => $spot->getContent(),
             'location' => [
                 'latitude' => $spot->getLocation()->getLat(),
                 'longitude' => $spot->getLocation()->getLng()

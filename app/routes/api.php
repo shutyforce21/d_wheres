@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 //認証ユーザーのみ
 Route::middleware('auth:users')->group(function() {
     //練習スポット
-    Route::resource('/spots', SpotController::class)->only(['index', 'store', 'show']);
+    Route::resource('/spots', SpotController::class)->only(['store']);
 });
-//ゲスト&認証ユーザーのみ
 
-// ユーザー
+//ゲスト&認証ユーザーのみ
+Route::resource('/spots', SpotController::class)->only(['index', 'show']);
+
 Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
 
     // 新規登録

@@ -9,6 +9,8 @@ use App\Packages\Shared\Service\ImagePath;
 use App\Packages\User\Domain\Spot\ReadModel\ReadSpot;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadAvailableTime;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadLocation;
+use App\Packages\User\Domain\Spot\Spot;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReadRepository implements ReadRepositoryInterface
 {
@@ -16,7 +18,11 @@ class ReadRepository implements ReadRepositoryInterface
 
     public function __construct(SpotModel $spotModel)
     {
-        $this->spotModel = $spotModel;
+        $this->spotModel = $spotModel->selectRaw(
+            "ST_X(location) as lng, " .
+            "ST_Y(location) as lat, " .
+            "id, code, name, image, code, prefecture_id, address, open_on, close_on"
+        );
     }
 
     /**
@@ -24,29 +30,18 @@ class ReadRepository implements ReadRepositoryInterface
      */
     public function all()
     {
-        $rows = $this->spotModel->selectRaw(
-            "ST_X(location) as lng, " .
-            "ST_Y(location) as lat, " .
-            "id, code, name, image, code, prefecture_id, address, open_on, close_on"
-        )->get();
+        $rows = $this->spotModel->get();
 
         if ($rows->isNotEmpty()) {
-            foreach ($rows as $r) {
-                $spots[] = new ReadSpot(
-                    $r->id,
-                    $r->code,
-                    $r->name,
-                    ImagePath::getAbsolutePath($r->image),
-                    $r->prefecture_id,
-                    $r->address,
-                    $r->content,
-                    new ReadLocation(
-                        $r->lat,
-                        $r->lng
-                    ),
+            foreach ($rows as $row) {
+                $spots[] = ReadSpot::reconstructForPart(
+                    $row->id,
+                    $row->name,
+                    ImagePath::getAbsolutePath($row->image),
+                    $row->address,
                     new ReadAvailableTime(
-                        $r->open_on,
-                        $r->close_on
+                        $row->open_on,
+                        $row->close_on
                     )
                 );
             }
@@ -54,5 +49,38 @@ class ReadRepository implements ReadRepositoryInterface
 
         }
         return [];
+    }
+
+    /**
+     * @param $spotId
+     * @return ReadSpot
+     */
+    public function findById($spotId)
+    {
+        if ($row = $this->spotModel->where('id', $spotId)->first()) {
+
+            $readSpot = ReadSpot::reconstructForDetail(
+                $row->id,
+                $row->code,
+                $row->name,
+                ImagePath::getAbsolutePath($row->image),
+                $row->prefecture_id,
+                $row->address,
+                $row->content,
+                new ReadLocation(
+                    $row->lat,
+                    $row->lng
+                ),
+                new ReadAvailableTime(
+                    $row->open_on,
+                    $row->close_on
+                )
+            );
+            return $readSpot;
+
+        } else {
+            throw new ModelNotFoundException('スポットの情報が見つかりませんでした。');
+        }
+
     }
 }

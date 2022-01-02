@@ -18,7 +18,49 @@ class ReadSpot
     private ReadLocation $location;
     private ReadAvailableTime $availableTime;
 
-    public function __construct(
+    private function __construct() {}
+
+    /**
+     * 一覧用 生成ルート
+     *
+     * @param $id
+     * @param $name
+     * @param $image
+     * @param $address
+     * @param ReadAvailableTime $availableTime
+     * @return ReadSpot
+     */
+    public static function reconstructForPart(
+        $id,
+        $name,
+        $image,
+        $address,
+        ReadAvailableTime $availableTime
+    ) {
+        $self = new self();
+        $self->id = $id;
+        $self->name = $name;
+        $self->image = $image;
+        $self->address = $address;
+        $self->availableTime = $availableTime;
+        return $self;
+    }
+
+    /**
+     * 詳細取得用 生成ルート
+     *
+     * @param $id
+     * @param $code
+     * @param $name
+     * @param $image
+     * @param $prefectureId
+     * @param $address
+     * @param $content
+     * @param ReadLocation $location
+     * @param ReadAvailableTime $availableTime
+     * @return ReadSpot
+     */
+    public static function reconstructForDetail(
         $id,
         $code,
         $name,
@@ -29,15 +71,17 @@ class ReadSpot
         ReadLocation $location,
         ReadAvailableTime $availableTime
     ) {
-        $this->id = $id;
-        $this->code = $code;
-        $this->name = $name;
-        $this->image = $image;
-        $this->prefectureId = $prefectureId;
-        $this->address = $address;
-        $this->content = $content;
-        $this->location = $location;
-        $this->availableTime = $availableTime;
+        $self = new self();
+        $self->id = $id;
+        $self->code = $code;
+        $self->name = $name;
+        $self->image = $image;
+        $self->prefectureId = $prefectureId;
+        $self->address = $address;
+        $self->content = $content;
+        $self->location = $location;
+        $self->availableTime = $availableTime;
+        return $self;
     }
 
     /**

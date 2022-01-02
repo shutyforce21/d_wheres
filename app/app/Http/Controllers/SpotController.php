@@ -5,6 +5,7 @@ use App\Http\Requests\RegisterSpotRequest;
 use App\Http\Resources\SpotResource;
 use App\Packages\User\UseCase\Spot\Get\GetSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
+use App\Packages\User\UseCase\Spot\Show\ShowSpot;
 use Illuminate\Http\Response;
 use Throwable;
 
@@ -60,9 +61,29 @@ class SpotController extends Controller
         }
     }
 
-    public function show($spotId)
+    /**
+     * @param $spotId
+     * @param ShowSpot $useCase
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show($spotId, ShowSpot $useCase)
     {
+        try {
+            $outputData = $useCase->handle($spotId);
+            return response()->json(
+                [
+                    'message' => 'success',
+                    'data' => SpotResource::toArrayForDetail($outputData)
+                ],
+                Response::HTTP_OK
+            );
 
+        } catch(Throwable $e) {
+            return response()->json(
+                ['message' => $e->getMessage()],
+                Response::HTTP_NOT_FOUND
+            );
+        }
     }
 }
 
