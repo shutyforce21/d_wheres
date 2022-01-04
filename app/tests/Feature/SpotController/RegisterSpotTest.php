@@ -48,10 +48,9 @@ class RegisterSpotTest extends TestCase
         $spotModel = Spot::orderBy('created_at', 'desc')->first();
 
         // スポットのイメージパスを取得
-        $imagePath = $spotModel->image;
-        $logoPath = str_replace('storage','public',  $imagePath);
+        $imagePath = str_replace('storage','public',  $spotModel->image);
         // スポットのイメージを削除
-        $this->assertTrue(Storage::exists($logoPath));
+        $this->assertTrue(Storage::exists($imagePath));
         $this->assertTrue(Storage::deleteDirectory("public/spot/{$spotModel->code}/"));
     }
 

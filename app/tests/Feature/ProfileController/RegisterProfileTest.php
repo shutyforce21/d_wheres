@@ -4,8 +4,11 @@
 namespace Tests\Feature\ProfileController;
 
 
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class RegisterProfileTest extends TestCase
@@ -54,8 +57,19 @@ class RegisterProfileTest extends TestCase
                 'genre_id' => $genreId
             ]);
         }
+
+        //ユーザーモデル取得
+        $userModel = User::find($this->userId);
+        $profileModel = $userModel->profile;
+
+        // プロフィールのイメージパスを取得
+        $imagePath = str_replace('storage','public',  $profileModel->image);
+        // プロフィールのイメージを削除
+        $this->assertTrue(Storage::exists($imagePath));
+        $this->assertTrue(Storage::deleteDirectory("public/user/{$userModel->code}/"));
+
     }
-    
+
     public function 「異常系」ユーザーがプロフールを登録する($data){}
 
 
