@@ -53,7 +53,7 @@ class SpotResource
     public static function collection(array $spots)
     {
         return array_map(function($spot){
-            return self::toArray($spot);
+            return self::toArrayForPart($spot);
         }, $spots);
     }
 }
