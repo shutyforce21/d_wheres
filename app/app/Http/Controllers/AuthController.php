@@ -59,6 +59,20 @@ class AuthController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request)
+    {
+        $user = $request->user();
+        $user->tokens()->delete();
+
+        return response()->json(
+            ['message' => 'success'],
+            Response::HTTP_OK);
+    }
+
+    /**
      * tokenが認証済みかどうか
      * @return \Illuminate\Http\JsonResponse
      */

@@ -30,8 +30,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
     Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
     // ログイン
     Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
-
+    // 認証ルート
     Route::middleware('auth:users')->group(function() {
+        // ログアウト
+        Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
         //tokenが認証済みかどうか(api通信が無いページ用)
         Route::get('/is_authenticated', [\App\Http\Controllers\AuthController::class, 'isAuthenticated']);
         // プロフィール設定
