@@ -1,10 +1,7 @@
 <?php
 
-
 namespace Tests\Feature\ProfileController;
 
-
-use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\UploadedFile;
@@ -82,7 +79,7 @@ class RegisterProfileTest extends TestCase
         yield [
             'data' => [
                 'image' => UploadedFile::fake()->create('sample.jpg')->size(499),
-                'biography' => 'こちらhユーザーのプロフィール情報になります。',
+                'biography' => 'こちらはユーザーのプロフィール情報になります。',
                 'genres' => [1,2]
             ]
         ];
