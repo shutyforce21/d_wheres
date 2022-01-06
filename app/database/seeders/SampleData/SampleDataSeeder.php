@@ -39,11 +39,40 @@ class SampleDataSeeder extends Seeder
             ],
         ]);
 
+        DB::table('profiles')->insert([
+            [
+                'user_id' => 1,
+                'image' => "/image/sample/user.jpg",
+                'biography' => "Thank you coming my page!!\nThis is my dance profile and I like HipHop, Breakin"
+            ]
+        ]);
+
+        DB::table('user_genre')->insert([
+            ['user_id' => 1, 'genre_id' => 1],
+            ['user_id' => 1, 'genre_id' => 2],
+            ['user_id' => 1, 'genre_id' => 3],
+        ]);
+
+        DB::table('follows')->insert([
+            ['follower_id' => 1, 'followed_id' => 2],
+            ['follower_id' => 1, 'followed_id' => 3],
+            ['follower_id' => 1, 'followed_id' => 4],
+            ['follower_id' => 2, 'followed_id' => 1],
+            ['follower_id' => 2, 'followed_id' => 3],
+            ['follower_id' => 2, 'followed_id' => 4],
+            ['follower_id' => 3, 'followed_id' => 1],
+            ['follower_id' => 3, 'followed_id' => 2],
+            ['follower_id' => 3, 'followed_id' => 4],
+            ['follower_id' => 4, 'followed_id' => 1],
+            ['follower_id' => 4, 'followed_id' => 2],
+            ['follower_id' => 4, 'followed_id' => 3],
+        ]);
+
         for ($i=1;$i<50;$i++) {
             $spots[] = [
                 'code' => 'asdfasdf1234'.$i,
                 'name' => '池袋駅東口'. $i,
-                'image' => 'storage/spot/61cffe77d3e74/main/captain-cat.jpg',
+                'image' => '/image/sample/spot.jpg',
                 'prefecture_id' => rand(1,2),
                 'address' => '東京都池袋1-2-1',
                 'content' => 'こちらに練習場所の詳細を記載できます。',

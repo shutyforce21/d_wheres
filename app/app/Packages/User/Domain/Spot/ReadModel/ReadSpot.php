@@ -3,6 +3,7 @@
 namespace App\Packages\User\Domain\Spot\ReadModel;
 
 
+use App\Packages\Shared\Service\ImagePath;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadAvailableTime;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadLocation;
 
@@ -113,7 +114,10 @@ class ReadSpot
      */
     public function getImage()
     {
-        return $this->image;
+        if ($this->image) {
+            $imgPath = ImagePath::getAbsolutePath($this->image);
+        }
+        return $imgPath;
     }
 
     /**

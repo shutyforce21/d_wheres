@@ -37,7 +37,7 @@ class ReadRepository implements ReadRepositoryInterface
                 $spots[] = ReadSpot::reconstructForPart(
                     $row->id,
                     $row->name,
-                    ImagePath::getAbsolutePath($row->image),
+                    $row->image,
                     $row->address,
                     new ReadAvailableTime(
                         $row->open_on,
@@ -63,7 +63,7 @@ class ReadRepository implements ReadRepositoryInterface
                 $row->id,
                 $row->code,
                 $row->name,
-                ImagePath::getAbsolutePath($row->image),
+                $row->image,
                 $row->prefecture_id,
                 $row->address,
                 $row->content,

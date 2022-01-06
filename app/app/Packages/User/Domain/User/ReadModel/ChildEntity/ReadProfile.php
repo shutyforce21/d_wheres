@@ -2,6 +2,8 @@
 
 namespace App\Packages\User\Domain\User\ReadModel\ChildEntity;
 
+use App\Packages\Shared\Service\ImagePath;
+
 class ReadProfile
 {
     private ?string $image;
@@ -30,7 +32,10 @@ class ReadProfile
      */
     public function getImage()
     {
-        return $this->image;
+        if ($this->image) {
+            $imgPath = ImagePath::getAbsolutePath($this->image);
+        }
+        return $imgPath;
     }
 
     /**
