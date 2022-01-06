@@ -7,6 +7,7 @@ use App\Packages\Shared\Service\ImagePath;
 class ReadProfile
 {
     private ?string $image;
+    private ?string $backgroundImage;
     private ?string $biography;
     private ?array $genres;
     private ?int $follows;
@@ -14,6 +15,7 @@ class ReadProfile
 
     public function __construct(
         $image,
+        $backgroundImage,
         $follows,
         $followers,
         $biography,
@@ -21,6 +23,7 @@ class ReadProfile
     )
     {
         $this->image = $image;
+        $this->backgroundImage = $backgroundImage;
         $this->follows = $follows;
         $this->followers = $followers;
         $this->biography = $biography;
@@ -28,14 +31,33 @@ class ReadProfile
     }
 
     /**
+     * @param $imgPath
+     * @return null
+     */
+    protected function setOriginPath($imgPath)
+    {
+        if ($imgPath) {
+            ImagePath::getAbsolutePath($imgPath);
+
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @return string|null
      */
     public function getImage()
     {
-        if ($this->image) {
-            $imgPath = ImagePath::getAbsolutePath($this->image);
-        }
-        return $imgPath;
+        return $this->setOriginPath($this->image);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBackgroundImage()
+    {
+        return $this->setOriginPath($this->backgroundImage);
     }
 
     /**

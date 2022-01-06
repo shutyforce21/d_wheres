@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->string('image')->nullable()->comment('イメージ画像');
+            $table->string('background')->nullable()->comment('背景画像');
             $table->tinyText('biography')->nullable()->comment('自己紹介');
             $table->timestamps();
         });

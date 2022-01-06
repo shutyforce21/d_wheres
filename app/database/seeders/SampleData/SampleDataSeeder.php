@@ -43,6 +43,7 @@ class SampleDataSeeder extends Seeder
             [
                 'user_id' => 1,
                 'image' => "/image/sample/user.jpg",
+                'background' => "/image/sample/background.jpg",
                 'biography' => "Thank you coming my page!!\nThis is my dance profile and I like HipHop, Breakin"
             ]
         ]);
