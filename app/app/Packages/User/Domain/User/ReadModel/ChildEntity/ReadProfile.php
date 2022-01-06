@@ -32,12 +32,12 @@ class ReadProfile
 
     /**
      * @param $imgPath
-     * @return null
+     * @return string|null
      */
     protected function setOriginPath($imgPath)
     {
         if ($imgPath) {
-            ImagePath::getAbsolutePath($imgPath);
+            return ImagePath::getAbsolutePath($imgPath);
 
         } else {
             return null;

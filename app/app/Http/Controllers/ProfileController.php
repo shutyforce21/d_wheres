@@ -36,17 +36,15 @@ class ProfileController extends Controller
         }
     }
 
-
-
     /**
      * @param ShowProfile $useCase
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getMyProfile(ShowProfile $useCase)
+    public function show($userId, ShowProfile $useCase)
     {
-        $userId = Auth::id();
+        $authId = Auth::id();
         try {
-            $outputData = $useCase->handle($userId);
+            $outputData = $useCase->handle($authId, $userId);
             return response()->json(
                 [
                     'message' => 'success',
@@ -57,9 +55,8 @@ class ProfileController extends Controller
         } catch (\Throwable $throwable) {
             return response()->json(
                 ['message' => $throwable->getMessage()],
-                Response::HTTP_INTERNAL_SERVER_ERROR
+                Response::HTTP_NOT_FOUND
             );
         }
     }
-
 }

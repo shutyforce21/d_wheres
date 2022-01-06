@@ -13,10 +13,21 @@ class ShowProfile
         $this->readRepository = $readRepository;
     }
 
-    public function handle($userId)
+    /**
+     * @param $authId
+     * @param $userId
+     * @return \App\Packages\User\Domain\User\ReadModel\ReadUser
+     * @throws \Exception
+     */
+    public function handle($authId, $userId)
     {
-        $outputData = $this->readRepository->findById($userId);
-        return $outputData;
+        $readUserEntity = $this->readRepository->findById($userId);
+        // 自分自身のプロフィールを取得した場合
+        if (intval($authId) === intval($userId)) {
+            // selfFlagをtrue
+            $readUserEntity->isSelf();
+        }
+        return $readUserEntity;
     }
 
 }

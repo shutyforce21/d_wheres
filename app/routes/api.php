@@ -24,31 +24,25 @@ Route::middleware('auth:users')->group(function() {
 //ゲスト&認証ユーザーのみ
 Route::resource('/spots', SpotController::class)->only(['index', 'show']);
 
-Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
-
-    // 新規登録
-    Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
-    // ログイン
-    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
-    // 認証ルート
-    Route::middleware('auth:users')->group(function() {
-        // ログアウト
-        Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
-        //tokenが認証済みかどうか(api通信が無いページ用)
-        Route::get('/is_authenticated', [\App\Http\Controllers\AuthController::class, 'isAuthenticated']);
-        // プロフィール
-        Route::resource('/profiles', \App\Http\Controllers\ProfileController::class)->only(['store', 'show']);
-        // Myプロフィール
-        Route::get('/my-profile', [\App\Http\Controllers\ProfileController::class, 'getMyProfile']);
-        // フォロー
-        Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
-    });
+// 新規登録
+Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
+// ログイン
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+// 認証ルート
+Route::middleware('auth:users')->group(function() {
+    // ログアウト
+    Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+    //tokenが認証済みかどうか(api通信が無いページ用)
+    Route::get('/is_authenticated', [\App\Http\Controllers\AuthController::class, 'isAuthenticated']);
+    // プロフィール
+    Route::resource('/profiles', \App\Http\Controllers\ProfileController::class)->only(['store', 'show']);
+    // フォロー
+    Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
+    // フォロー中のユーザーを取得する
+    Route::get('/follows', [\App\Http\Controllers\FollowController::class, 'getFollows']);
+    // フォロー中のユーザーを取得する
+    Route::get('/followers', [\App\Http\Controllers\FollowController::class, 'getFollowers']);
 });
-
-// CORSを許可
-//Route::middleware(['cors'])->group(function () {
-//    Route::get('/a', [\App\Http\Controllers\AuthController::class, 'sample']);
-//});
 
 Route::get('u', function () {
     $a = \App\Models\User::find(1);

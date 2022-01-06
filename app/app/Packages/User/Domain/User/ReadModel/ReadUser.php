@@ -11,6 +11,7 @@ class ReadUser
     private string $code;
     private string $name;
     private ReadProfile $profile;
+    private bool $isSelf;
 
     public function __construct(
         $id,
@@ -23,6 +24,23 @@ class ReadUser
         $this->code = $code;
         $this->name = $name;
         $this->profile = $profile;
+        $this->isSelf = false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getSelfFlag()
+    {
+        return $this->isSelf;
+    }
+
+    /**
+     * 自信のプロフィールだった場合
+     */
+    public function isSelf()
+    {
+        $this->isSelf = true;
     }
 
     /**
