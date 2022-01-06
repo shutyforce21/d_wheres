@@ -47,6 +47,7 @@ class ShowProfileTest extends TestCase
                     "name",
                     "profile" => [
                         "image",
+                        "background",
                         "follows",
                         "followers",
                         "biography",
