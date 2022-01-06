@@ -50,7 +50,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
 //    Route::get('/a', [\App\Http\Controllers\AuthController::class, 'sample']);
 //});
 
-
+Route::get('u', function () {
+    $a = \App\Models\User::find(1);
+    dd($a->follows->count());
+});
 
 ?>
 

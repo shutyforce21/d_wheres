@@ -36,6 +36,8 @@ class ReadRepository implements ReadRepositoryInterface
                 $userModel->name,
                 new ReadProfile(
                     optional($userModel->profile)->image,
+                    $userModel->follows->count(),
+                    $userModel->followers->count(),
                     optional($userModel->profile)->biography,
                     optional($userModel->genres)->map(function($g) {
                         return $g->id;

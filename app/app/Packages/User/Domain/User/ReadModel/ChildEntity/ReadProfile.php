@@ -7,14 +7,20 @@ class ReadProfile
     private ?string $image;
     private ?string $biography;
     private ?array $genres;
+    private ?int $follows;
+    private ?int $followers;
 
     public function __construct(
         $image,
+        $follows,
+        $followers,
         $biography,
         $genres
     )
     {
         $this->image = $image;
+        $this->follows = $follows;
+        $this->followers = $followers;
         $this->biography = $biography;
         $this->genres = $genres;
     }
@@ -25,6 +31,22 @@ class ReadProfile
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFollows()
+    {
+        return $this->follows;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
     }
 
     /**

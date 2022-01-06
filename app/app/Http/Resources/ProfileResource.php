@@ -16,6 +16,8 @@ class ProfileResource
             'name' => $user->getName(),
             'profile' => [
                 'image' => $user->getProfile()->getImage(),
+                'follows' => $user->getProfile()->getFollows(),
+                'followers' => $user->getProfile()->getFollowers(),
                 'biography' => $user->getProfile()->getBiography(),
                 'genres' => $user->getProfile()->getGenres(),
             ]
