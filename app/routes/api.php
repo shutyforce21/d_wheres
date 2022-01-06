@@ -36,10 +36,10 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
         Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
         //tokenが認証済みかどうか(api通信が無いページ用)
         Route::get('/is_authenticated', [\App\Http\Controllers\AuthController::class, 'isAuthenticated']);
-        // プロフィール設定
-        Route::post('/profile/store', [\App\Http\Controllers\ProfileController::class, 'store']);
-        // プロフィール表示
-        Route::get('/profile', [\App\Http\Controllers\ProfileController::class, 'show']);
+        // プロフィール
+        Route::resource('/profiles', \App\Http\Controllers\ProfileController::class)->only(['store', 'show']);
+        // Myプロフィール
+        Route::get('/my-profile', [\App\Http\Controllers\ProfileController::class, 'getMyProfile']);
         // フォロー
         Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
     });

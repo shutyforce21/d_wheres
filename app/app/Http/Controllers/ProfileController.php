@@ -18,8 +18,7 @@ class ProfileController extends Controller
      */
     public function store(RegisterUserProfileRequest $request, RegisterProfile $useCase)
     {
-        $userId = 1;
-//        $userId = Auth::id();
+        $userId = Auth::id();
         try {
             $inputData = $request->getInputData();
             $useCase->handle($inputData, $userId);
@@ -37,18 +36,21 @@ class ProfileController extends Controller
         }
     }
 
+
+
     /**
      * @param ShowProfile $useCase
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(ShowProfile $useCase)
+    public function getMyProfile(ShowProfile $useCase)
     {
-        $userId = 1;
-//        $userId = Auth::id();
+        $userId = Auth::id();
         try {
             $outputData = $useCase->handle($userId);
             return response()->json(
-                ['data' => ProfileResource::toArray($outputData)],
+                [
+                    'message' => 'success',
+                    'data' => ProfileResource::toArray($outputData)],
                 Response::HTTP_OK
             );
 
