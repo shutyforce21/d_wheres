@@ -22,7 +22,7 @@ class ProfileResource
                 'biography' => $user->getProfile()->getBiography(),
                 'genres' => $user->getProfile()->getGenres(),
             ],
-            'isSelf' => $user->getSelfFlag()
+            'is_self' => $user->getSelfFlag()
         ];
     }
 }

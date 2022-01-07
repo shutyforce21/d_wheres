@@ -54,13 +54,13 @@ class ShowProfileTest extends TestCase
                         "biography",
                         "genres"
                     ],
-                    "isSelf"
+                    "is_self"
                 ]
             ]
         );
 
         $this->assertEquals(
-            $response->json()["data"]["isSelf"],
+            $response->json()["data"]["is_self"],
             true
         );
     }
@@ -91,13 +91,13 @@ class ShowProfileTest extends TestCase
                         "biography",
                         "genres"
                     ],
-                    "isSelf"
+                    "is_self"
                 ]
             ]
         );
 
         $this->assertEquals(
-            $response->json()["data"]["isSelf"],
+            $response->json()["data"]["is_self"],
             false
         );
     }

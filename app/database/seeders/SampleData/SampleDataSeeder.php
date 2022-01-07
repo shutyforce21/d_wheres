@@ -12,28 +12,28 @@ class SampleDataSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'code' => 'asdf1001',
-                'name' => 'ダンサー1',
+                'code' => 'a1s2d3f1001',
+                'name' => 'dancer name1',
                 'email' => 'asdf1@asdf.com',
                 'password' => Hash::make('password')
             ],[
-                'code' => 'asdf1002',
-                'name' => 'ダンサー2',
+                'code' => 'a1s2d3f1002',
+                'name' => 'dancer name2',
                 'email' => 'asdf2@asdf.com',
                 'password' => Hash::make('password')
             ],[
-                'code' => 'asdf1003',
-                'name' => 'ダンサー3',
+                'code' => 'a1s2d3f1003',
+                'name' => 'dancer name3',
                 'email' => 'asdf3@asdf.com',
                 'password' => Hash::make('password')
             ],[
-                'code' => 'asdf1004',
-                'name' => 'ダンサー4',
+                'code' => 'a1s2d3f1004',
+                'name' => 'dancer name4',
                 'email' => 'asdf4@asdf.com',
                 'password' => Hash::make('password')
             ],[
-                'code' => 'asdf1005',
-                'name' => 'ダンサー5',
+                'code' => 'a1s2d3f1005',
+                'name' => 'dancer name5',
                 'email' => 'asdf5@asdf.com',
                 'password' => Hash::make('password')
             ],
