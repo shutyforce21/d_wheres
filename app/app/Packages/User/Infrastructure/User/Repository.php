@@ -112,7 +112,7 @@ class Repository implements RepositoryInterface
      * @return bool
      * @throws \Exception
      */
-    public function follow(User $user)
+    public function followAndSave(User $user)
     {
         if ($userModel = $this->userModel->find($user->getId())) {
             try {

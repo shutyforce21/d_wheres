@@ -19,7 +19,7 @@ class LoginTest extends TestCase
         $samplePass = 'password';
 
         $loginResponse = $this->postJson(
-            '/api/user/login',
+            '/api/login',
             [
                 'email' => $sampleEmail,
                 'password' => $samplePass
@@ -39,7 +39,7 @@ class LoginTest extends TestCase
         $samplePass = 'password';
 
         $loginResponse = $this->postJson(
-            '/api/user/login',
+            '/api/login',
             [
                 'email' => $sampleEmail,
                 'password' => $samplePass

@@ -20,11 +20,10 @@ class UserController extends Controller
      */
     public function follow($followedId, FollowUser $useCase)
     {
-//        $followerId = Auth::id();
-        $followerId = 1;
+        $authId = Auth::id();
 
         try {
-            $useCase->handle($followerId, $followedId);
+            $useCase->handle($authId, $followedId);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK

@@ -19,7 +19,7 @@ class RegisterProfileTest extends TestCase
     {
         parent::setUp();
         $loginResponse = $this->postJson(
-            '/api/user/login',
+            '/api/login',
             ['email' => 'asdf1@asdf.com', 'password' => 'password']
         );
 
@@ -38,7 +38,7 @@ class RegisterProfileTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->post('/api/user/profile/store', $data);
+        ])->post('/api/profiles', $data);
         $response->assertSuccessful();
 
         // プロフィール情報が保存されているか

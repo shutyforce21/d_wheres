@@ -82,19 +82,19 @@ class User
 
     /**
      * フォローユーザーのIds
-     * @param $followedIds
+     * @param array $followedIds
      */
-    public function setFollowedIds($followedIds)
+    public function setFollowedIds(array $followedIds)
     {
         $this->followedIds = $followedIds;
     }
 
     /**
-     * ユーザーをフォローする
-     * @param $followedId
+     * フォローする
+     * @param int $followedId
      * @throws \Exception
      */
-    public function follow($followedId)
+    public function follow(int $followedId)
     {
         if (in_array($followedId, $this->getFollowedIds())) {
             throw new \Exception('既にフォロー済みです。');

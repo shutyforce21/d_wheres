@@ -21,8 +21,8 @@ class FollowTest extends TestCase
     {
         parent::setUp();
         $loginResponse = $this->postJson(
-            '/api/user/login',
-            ['email' => 'asdf1@asdf.com', 'password' => 'password']
+            '/api/login',
+            ['email' => 'asdf5@asdf.com', 'password' => 'password']
         );
 
         $authToken = $loginResponse->getOriginalContent()['data']['token'];
@@ -41,7 +41,7 @@ class FollowTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->get("/api/user/follow/{$followedId}");
+        ])->get("/api/follow/{$followedId}");
         $response->assertSuccessful();
 
         $this->assertDatabaseHas('follows', [
@@ -51,14 +51,22 @@ class FollowTest extends TestCase
     }
 
     /**
-     * 無効なユーザーをフォローした時
+     * 無効なユーザーをフォローしようとした時
      * @test
      */
     public function 「異常系」他のユーザーをフォローする()
     {
+        //case1: 自分自身をフォロー
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->get("/api/user/follow/{$this->userId}");
+        ])->get("/api/follow/{$this->userId}");
+
+        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+
+        //case2: 存在しないユーザーをフォロー
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authToken
+        ])->get("/api/follow/999");
 
         $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
     }

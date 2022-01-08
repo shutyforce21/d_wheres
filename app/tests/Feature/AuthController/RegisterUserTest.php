@@ -18,7 +18,7 @@ class RegisterUserTest extends TestCase
      */
     public function 「正常系」ユーザーが新規登録する($data)
     {
-        $loginResponse = $this->postJson('/api/user/register', $data);
+        $loginResponse = $this->postJson('/api/register', $data);
         $loginResponse->assertSuccessful();
 
         // ユーザー情報が保存されているか
@@ -41,7 +41,7 @@ class RegisterUserTest extends TestCase
     {
         // パスワード制約: 大文字、小文字、数字
         $data['password'] = 'asdf1234';
-        $loginResponse = $this->postJson('/api/user/register', $data);
+        $loginResponse = $this->postJson('/api/register', $data);
 
         //バリデーションエラー
         $this->assertEquals(

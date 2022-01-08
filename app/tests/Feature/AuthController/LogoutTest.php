@@ -19,7 +19,7 @@ class LogoutTest extends TestCase
     {
         parent::setUp();
         $loginResponse = $this->postJson(
-            '/api/user/login',
+            '/api/login',
             ['email' => 'asdf1@asdf.com', 'password' => 'password']
         );
 
@@ -41,7 +41,7 @@ class LogoutTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->get('/api/user/logout');
+        ])->get('/api/logout');
         $response->assertSuccessful();
 
         //トークンテーブルからuserIdが消えているか
@@ -58,7 +58,7 @@ class LogoutTest extends TestCase
         $unAuthorizedToken = 'sdf;lkjasdfl;j';
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$unAuthorizedToken
-        ])->get('/api/user/logout');
+        ])->get('/api/logout');
         $response->assertStatus(Response::HTTP_UNAUTHORIZED);
     }
 }

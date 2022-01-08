@@ -13,10 +13,15 @@ class FollowUser
         $this->repository = $repository;
     }
 
-    public function handle($followedId, $followerId)
+    /**
+     * @param $authId
+     * @param $followedId
+     * @throws \Exception
+     */
+    public function handle($authId, $followedId)
     {
-        $followedUser = $this->repository->findById($followerId);
+        $followedUser = $this->repository->findById($authId);
         $followedUser->follow($followedId);
-        $this->repository->follow($followedUser);
+        $this->repository->followAndSave($followedUser);
     }
 }

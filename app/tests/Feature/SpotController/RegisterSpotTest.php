@@ -19,7 +19,7 @@ class RegisterSpotTest extends TestCase
     {
         parent::setUp();
         $loginResponse = $this->postJson(
-            '/api/user/login',
+            '/api/login',
             ['email' => 'asdf1@asdf.com', 'password' => 'password']
         );
 
