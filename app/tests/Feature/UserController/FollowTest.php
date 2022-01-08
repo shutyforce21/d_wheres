@@ -51,10 +51,9 @@ class FollowTest extends TestCase
     }
 
     /**
-     * 無効なユーザーをフォローしようとした時
      * @test
      */
-    public function 「異常系」他のユーザーをフォローする()
+    public function 「異常系」自分自身をフォローする()
     {
         //case1: 自分自身をフォロー
         $response = $this->withHeaders([
@@ -62,7 +61,13 @@ class FollowTest extends TestCase
         ])->get("/api/follow/{$this->userId}");
 
         $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
 
+    /**
+     * @test
+     */
+    public function 「異常系」存在しないユーザーをフォローする()
+    {
         //case2: 存在しないユーザーをフォロー
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
