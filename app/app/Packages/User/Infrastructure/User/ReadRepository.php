@@ -41,7 +41,7 @@ class ReadRepository implements ReadRepositoryInterface
                     $userModel->followers->count(),
                     optional($userModel->profile)->biography,
                     optional($userModel->genres)->map(function($g) {
-                        return $g->id;
+                        return $g->name;
                     })->toArray()
                 )
             );
