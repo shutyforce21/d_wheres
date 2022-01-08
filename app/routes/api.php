@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//マスタデータ
+Route::get('/master', [\App\Http\Controllers\MasterController::class, 'getMaster']);
+
 //認証ユーザーのみ
 Route::middleware('auth:users')->group(function() {
     //練習スポット
