@@ -5,6 +5,7 @@ namespace Tests\Feature\UserController;
 
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Http\Response;
 use Tests\TestCase;
 
 class UnfollowTest extends TestCase
@@ -51,6 +52,31 @@ class UnfollowTest extends TestCase
             'follower_id' => $this->userId,
             'followed_id' => $followedId
         ]);
+    }
 
+    /**
+     * @test
+     */
+    public function 「異常系」自分自身をアンフォローする()
+    {
+        //case1: 自分自身をフォロー
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authToken
+        ])->get("/api/unfollow/{$this->userId}");
+
+        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    /**
+     * @test
+     */
+    public function 「異常系」フォローしていないユーザーをアンフォローする()
+    {
+        //case2: 存在しないユーザーをフォロー
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authToken
+        ])->get("/api/unfollow/999");
+
+        $response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }

@@ -20,8 +20,8 @@ class FollowUser
      */
     public function handle($authId, $followedId)
     {
-        $followedUser = $this->repository->findById($authId);
-        $followedUser->follow($followedId);
-        $this->repository->followAndSave($followedUser);
+        $user = $this->repository->findById($authId);
+        $user->follow($followedId);
+        $this->repository->followAndSave($user);
     }
 }

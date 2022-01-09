@@ -108,6 +108,7 @@ class Repository implements RepositoryInterface
 
 
     /**
+     * ユーザーをフォローする
      * @param User $user
      * @return bool
      * @throws \Exception
@@ -120,7 +121,29 @@ class Repository implements RepositoryInterface
                 return true;
 
             } catch (\Throwable $throwable) {
+                logger()->info($throwable->getMessage());
+                throw new \Exception($throwable->getMessage());
+            }
 
+        } else {
+            throw new \Exception('ユーザーが見つかりませんでした。');
+        }
+    }
+
+    /**
+     * ユーザーをアンフォローする
+     * @param User $user
+     * @return bool
+     * @throws \Exception
+     */
+    public function unfollowAndSave(User $user)
+    {
+        if ($userModel = $this->userModel->find($user->getId())) {
+            try {
+                $userModel->follows()->detach($user->getUnfollowedId());
+                return true;
+
+            } catch (\Throwable $throwable) {
                 logger()->info($throwable->getMessage());
                 throw new \Exception($throwable->getMessage());
             }

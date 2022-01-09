@@ -16,6 +16,7 @@ class User
     private Profile $profile;
     private ?array $followedIds = [];
     private ?int $newFollowedId;
+    private ?int $unfollowedId;
 
     private function __construct(){}
 
@@ -108,12 +109,39 @@ class User
     }
 
     /**
+     * アンフォローする
+     * @param int $followedId
+     * @throws \Exception
+     */
+    public function unfollow(int $followedId)
+    {
+        if (!in_array($followedId, $this->getFollowedIds())) {
+            throw new \Exception('指定されたユーザーをフォローしていません。');
+
+        } elseif ($followedId === $this->getId()) {
+            throw new \Exception('自分自信をアンフォローする事はできません。');
+
+        } else {
+            $this->unfollowedId = $followedId;
+        }
+    }
+
+    /**
      * フォローしたユーザーIDを取得する
      * @return int|null
      */
     public function getNewFollowedId()
     {
         return $this->newFollowedId;
+    }
+
+    /**
+     * アンフォローしたユーザーIDを取得する
+     * @return int|null
+     */
+    public function getUnfollowedId()
+    {
+        return $this->unfollowedId;
     }
 
     /**

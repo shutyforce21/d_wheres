@@ -32,4 +32,11 @@ interface RepositoryInterface
      * @throws \Exception
      */
     public function followAndSave(User $user);
+
+    /**
+     * @param User $user
+     * @return bool
+     * @throws \Exception
+     */
+    public function unfollowAndSave(User $user);
 }
