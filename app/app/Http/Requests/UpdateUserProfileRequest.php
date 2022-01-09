@@ -3,17 +3,18 @@
 
 namespace App\Http\Requests;
 
-use App\Packages\User\UseCase\User\RegisterProfile\Dto\InputData;
+use App\Packages\User\UseCase\User\UpdateProfile\Dto\InputData;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
-class RegisterUserProfileRequest extends FormRequest
+class UpdateUserProfileRequest extends FormRequest
 {
     public function attributes()
     {
         return [
+            'background' => '背景画像',
             'image' => 'プロフィール画像',
             'biography' => 'Bio',
             'genres' => 'ジャンル',
@@ -38,6 +39,7 @@ class RegisterUserProfileRequest extends FormRequest
     public function rules()
     {
         return [
+            'background' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'],
             'image' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'],
             'biography' => ['nullable', 'string'],
             'genres' => ['nullable', 'array'],
@@ -75,10 +77,14 @@ class RegisterUserProfileRequest extends FormRequest
         }
     }
 
+    /**
+     * @return InputData
+     */
     public function getInputData()
     {
         $data = $this->validated();
         return new InputData(
+            $data['background'],
             $data['image'],
             $this->spaceTrim($data['biography']),
             $data['genres']

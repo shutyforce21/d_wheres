@@ -22,9 +22,10 @@ interface RepositoryInterface
 
     /**
      * @param User $user
+     * @return bool
      * @throws \Exception
      */
-    public function saveProfile(User $user);
+    public function updateProfile(User $user);
 
     /**
      * @param User $user

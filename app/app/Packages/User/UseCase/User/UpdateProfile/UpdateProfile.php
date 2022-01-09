@@ -1,15 +1,13 @@
 <?php
 
-
-namespace App\Packages\User\UseCase\User\RegisterProfile;
-
+namespace App\Packages\User\UseCase\User\UpdateProfile;
 
 use App\Packages\User\Domain\User\ChildEntity\Profile;
 use App\Packages\User\Infrastructure\User\FileRepositoryInterface;
 use App\Packages\User\Infrastructure\User\RepositoryInterface;
-use App\Packages\User\UseCase\User\RegisterProfile\Dto\InputData;
+use App\Packages\User\UseCase\User\UpdateProfile\Dto\InputData;
 
-class RegisterProfile
+class UpdateProfile
 {
     private $repository;
     private $fileRepository;
@@ -38,19 +36,20 @@ class RegisterProfile
             $inputData->getGenres()
         );
 
-        if ($inputData->getImage()) {
-            //imageがあればrepositoryで保存し、pathを返却
-            $imgPath = $this->fileRepository->saveProfileImg(
-                $inputData->getImage(),
-                $userEntity->getCode()
-            );
-            //profileEntityにpathをセット
-            $profile->setImage($imgPath);
-        }
+        // 背景イメージの永続化
+        $imgPath = $this->fileRepository->updateBackgroundImage($inputData->getBackgroundImage(), $userEntity->getCode());
+        //profileEntityにpathをセット
+        $profile->setBackgroundImage($imgPath);
+
+        // イメージの永続化
+        $imgPath = $this->fileRepository->updateImage($inputData->getImage(), $userEntity->getCode());
+        //profileEntityにpathをセット
+        $profile->setImage($imgPath);
+
         //userEntityにprofileEntityをセット
         $userEntity->setProfile($profile);
-        //保存
-        $this->repository->saveProfile($userEntity);
+        //永続化
+        $this->repository->updateProfile($userEntity);
     }
 
 }

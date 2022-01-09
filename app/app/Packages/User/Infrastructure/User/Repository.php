@@ -57,6 +57,7 @@ class Repository implements RepositoryInterface
                 $userModel->code,
                 $userModel->name,
                 Profile::fromRepository(
+                    optional($userModel->profile)->background,
                     optional($userModel->profile)->image,
                     optional($userModel->profile)->biography,
                     optional($userModel->profile)->genres
@@ -80,15 +81,19 @@ class Repository implements RepositoryInterface
      * @return bool
      * @throws \Exception
      */
-    public function saveProfile(User $user)
+    public function updateProfile(User $user)
     {
         DB::beginTransaction();
         try {
-            $profileModel = new ProfileModel();
-            $profileModel->user_id = $user->getId();
-            $profileModel->image = $user->getProfile()->getImage();
-            $profileModel->biography = $user->getProfile()->getBiography();
-            $profileModel->save();
+            ProfileModel::updateOrCreate(
+                [
+                    'user_id' => $user->getId()
+                ], [
+                    'image' => $user->getProfile()->getImage(),
+                    'background' => $user->getProfile()->getBackgroundImage(),
+                    'biography' => $user->getProfile()->getBiography()
+                ]
+            );
 
             $this->userModel
                 ->find($user->getId())

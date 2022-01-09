@@ -31,25 +31,11 @@ class ReadProfile
     }
 
     /**
-     * @param $imgPath
-     * @return string|null
-     */
-    protected function setOriginPath($imgPath)
-    {
-        if ($imgPath) {
-            return ImagePath::getAbsolutePath($imgPath);
-
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * @return string|null
      */
     public function getImage()
     {
-        return $this->setOriginPath($this->image);
+        return $this->image;
     }
 
     /**
@@ -57,7 +43,7 @@ class ReadProfile
      */
     public function getBackgroundImage()
     {
-        return $this->setOriginPath($this->backgroundImage);
+        return $this->backgroundImage;
     }
 
     /**

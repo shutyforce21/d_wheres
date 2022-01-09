@@ -11,7 +11,14 @@ interface FileRepositoryInterface
      * @param $userCode
      * @return string
      */
-    public function saveProfileImg($file, $userCode);
+    public function updateImage($file, $userCode);
+
+    /**
+     * @param $file
+     * @param $userCode
+     * @return string
+     */
+    public function updateBackgroundImage($file, $userCode);
 
     /**
      * @param $file

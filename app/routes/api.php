@@ -3,6 +3,7 @@
 use App\Http\Controllers\SpotController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,8 +37,10 @@ Route::middleware('auth:users')->group(function() {
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     //tokenが認証済みかどうか(api通信が無いページ用)
     Route::get('/is_authenticated', [\App\Http\Controllers\AuthController::class, 'isAuthenticated']);
-    // プロフィール
-    Route::resource('/profiles', \App\Http\Controllers\ProfileController::class)->only(['store', 'show']);
+    // プロフィールリソース
+    Route::resource('/profiles', \App\Http\Controllers\ProfileController::class)->only(['show']);
+    // プロフィール更新 ※tokenでIDを識別するためリソースから分離
+    Route::put('/profiles', [\App\Http\Controllers\ProfileController::class, 'update']);
     // フォロー
     Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
     // アンフォロー

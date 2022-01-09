@@ -6,6 +6,7 @@ namespace App\Packages\User\Domain\User\ChildEntity;
 
 class Profile
 {
+    private ?string $backgroundImage;
     private ?string $image;
     private ?string $biography;
     private ?array $genres;
@@ -13,12 +14,14 @@ class Profile
     private function __construct(){}
 
     public static function fromRepository(
+        $backgroundImage,
         $image,
         $biography,
         $genres
     )
     {
         $self = new self();
+        $self->backgroundImage = $backgroundImage;
         $self->image = $image;
         $self->biography = $biography;
         $self->genres = $genres;
@@ -37,11 +40,27 @@ class Profile
     }
 
     /**
+     * @param string|null $backgroundImage
+     */
+    public function setBackgroundImage($backgroundImage)
+    {
+        $this->backgroundImage = $backgroundImage;
+    }
+
+    /**
      * @param string|null $image
      */
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBackgroundImage()
+    {
+        return $this->backgroundImage;
     }
 
     /**

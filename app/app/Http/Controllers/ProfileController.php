@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterUserProfileRequest;
+use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Resources\ProfileResource;
-use App\Packages\User\UseCase\User\RegisterProfile\RegisterProfile;
+use App\Packages\User\UseCase\User\UpdateProfile\UpdateProfile;
 use App\Packages\User\UseCase\User\ShowProfile\ShowProfile;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -12,28 +12,28 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     /**
-     * @param RegisterUserProfileRequest $request
-     * @param RegisterProfile $useCase
+     * @param UpdateUserProfileRequest $request
+     * @param UpdateProfile $useCase
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(RegisterUserProfileRequest $request, RegisterProfile $useCase)
+    public function update(UpdateUserProfileRequest $request, UpdateProfile $useCase)
     {
-        $userId = Auth::id();
-        try {
+        $authId = Auth::id();
+//        try {
             $inputData = $request->getInputData();
-            $useCase->handle($inputData, $userId);
+            $useCase->handle($inputData, $authId);
 
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK
             );
 
-        } catch (\Throwable $throwable) {
-            return response()->json(
-                ['message' => $throwable->getMessage()],
-                Response::HTTP_INTERNAL_SERVER_ERROR
-            );
-        }
+//        } catch (\Throwable $throwable) {
+//            return response()->json(
+//                ['message' => $throwable->getMessage()],
+//                Response::HTTP_INTERNAL_SERVER_ERROR
+//            );
+//        }
     }
 
     /**
