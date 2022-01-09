@@ -8,7 +8,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class RegisterProfileTest extends TestCase
+class UpdateProfileTest extends TestCase
 {
     use DatabaseTransactions;
 
@@ -34,11 +34,11 @@ class RegisterProfileTest extends TestCase
      * @test
      * @dataProvider initData
      */
-    public function 「正常系」ユーザーがプロフールを登録する($data)
+    public function 「正常系」ユーザーがプロフールを更新する($data)
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->post('/api/profiles', $data);
+        ])->put('/api/profiles', $data);
         $response->assertSuccessful();
 
         // プロフィール情報が保存されているか
@@ -61,24 +61,29 @@ class RegisterProfileTest extends TestCase
 
         // プロフィールのイメージパスを取得
         $imagePath = str_replace('storage','public',  $profileModel->image);
-        // プロフィールのイメージを削除
+        // プロフィールの背景イメージパスを取得
+        $backgroundImgPath = str_replace('storage','public',  $profileModel->background);
+        // プロフィールのイメージがstorageに存在するか
         $this->assertTrue(Storage::exists($imagePath));
+        // プロフィールの背景イメージがstorageに存在するか
+        $this->assertTrue(Storage::exists($backgroundImgPath));
         $this->assertTrue(Storage::deleteDirectory("public/user/{$userModel->code}/"));
 
     }
 
-    public function 「異常系」ユーザーがプロフールを登録する($data){}
+    public function 「異常系」ユーザーがプロフールを更新する($data){}
 
 
     /**
-     * プロフィール新規作成データ
+     * プロフィール更新データ
      * @return \Generator
      */
     public function initData()
     {
         yield [
             'data' => [
-                'image' => UploadedFile::fake()->create('sample.jpg')->size(499),
+                'background' => UploadedFile::fake()->create('bg-image.jpg')->size(499),
+                'image' => UploadedFile::fake()->create('image.jpg')->size(499),
                 'biography' => 'こちらはユーザーのプロフィール情報になります。',
                 'genres' => [1,2]
             ]

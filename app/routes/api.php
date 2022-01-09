@@ -26,7 +26,6 @@ Route::middleware('auth:users')->group(function() {
 
 //ゲスト&認証ユーザーのみ
 Route::resource('/spots', SpotController::class)->only(['index', 'show']);
-
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 // ログイン
@@ -50,8 +49,7 @@ Route::middleware('auth:users')->group(function() {
 });
 
 Route::get('u', function () {
-    $a = \App\Models\User::find(1);
-    dd($a->follows->count());
+
 });
 
 ?>
