@@ -3,7 +3,6 @@
 
 namespace Tests\Feature\UserController;
 
-
 use App\Models\Spot;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Http\Response;
@@ -39,11 +38,18 @@ class FollowTest extends TestCase
     {
         $followedId = 2;
 
+        //未フォロー
+        $this->assertDatabaseMissing('follows', [
+            'follower_id' => $this->userId,
+            'followed_id' => $followedId
+        ]);
+
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
         ])->get("/api/follow/{$followedId}");
         $response->assertSuccessful();
 
+        //フォロー済
         $this->assertDatabaseHas('follows', [
             'follower_id' => $this->userId,
             'followed_id' => $followedId

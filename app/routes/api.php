@@ -41,6 +41,8 @@ Route::middleware('auth:users')->group(function() {
     Route::resource('/profiles', \App\Http\Controllers\ProfileController::class)->only(['store', 'show']);
     // フォロー
     Route::get('/follow/{followed_id}', [\App\Http\Controllers\UserController::class, 'follow']);
+    // アンフォロー
+    Route::get('/unfollow/{followed_id}', [\App\Http\Controllers\UserController::class, 'unfollow']);
     // フォロー中のユーザーを取得する
     Route::get('/follows', [\App\Http\Controllers\FollowController::class, 'getFollows']);
     // フォロー中のユーザーを取得する
