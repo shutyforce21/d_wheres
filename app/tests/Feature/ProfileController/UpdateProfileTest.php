@@ -38,7 +38,7 @@ class UpdateProfileTest extends TestCase
     {
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->put('/api/profiles', $data);
+        ])->put("/api/profiles", $data);
         $response->assertSuccessful();
 
         // プロフィール情報が保存されているか
@@ -63,12 +63,13 @@ class UpdateProfileTest extends TestCase
         $imagePath = str_replace('storage','public',  $profileModel->image);
         // プロフィールの背景イメージパスを取得
         $backgroundImgPath = str_replace('storage','public',  $profileModel->background);
+
         // プロフィールのイメージがstorageに存在するか
         $this->assertTrue(Storage::exists($imagePath));
         // プロフィールの背景イメージがstorageに存在するか
         $this->assertTrue(Storage::exists($backgroundImgPath));
+        // ディレクトリごと削除
         $this->assertTrue(Storage::deleteDirectory("public/user/{$userModel->code}/"));
-
     }
 
     public function 「異常系」ユーザーがプロフールを更新する($data){}
