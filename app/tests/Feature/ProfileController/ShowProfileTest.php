@@ -45,10 +45,10 @@ class ShowProfileTest extends TestCase
                 "data" => [
                     "id",
                     "code",
-                    "name",
                     "profile" => [
                         "image",
                         "background",
+                        "name",
                         "follows",
                         "followers",
                         "biography",
@@ -82,10 +82,10 @@ class ShowProfileTest extends TestCase
                 "data" => [
                     "id",
                     "code",
-                    "name",
                     "profile" => [
                         "image",
                         "background",
+                        "name",
                         "follows",
                         "followers",
                         "biography",
