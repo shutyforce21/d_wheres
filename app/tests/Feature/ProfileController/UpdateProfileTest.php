@@ -44,6 +44,7 @@ class UpdateProfileTest extends TestCase
         // プロフィール情報が保存されているか
         $this->assertDatabaseHas('profiles', [
             'user_id' => $this->userId,
+            'name' => $data['name'],
             'biography' => $data['biography']
         ]);
 
@@ -85,6 +86,7 @@ class UpdateProfileTest extends TestCase
             'data' => [
                 'background' => UploadedFile::fake()->create('bg-image.jpg')->size(499),
                 'image' => UploadedFile::fake()->create('image.jpg')->size(499),
+                'name' => 'test dancer1 updated',
                 'biography' => 'こちらはユーザーのプロフィール情報になります。',
                 'genres' => [1,2]
             ]
