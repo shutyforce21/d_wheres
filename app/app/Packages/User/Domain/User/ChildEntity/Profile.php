@@ -17,6 +17,7 @@ class Profile
     public static function fromRepository(
         $backgroundImage,
         $image,
+        $name,
         $biography,
         $genres
     )
@@ -24,6 +25,7 @@ class Profile
         $self = new self();
         $self->backgroundImage = $backgroundImage;
         $self->image = $image;
+        $self->name = $name;
         $self->biography = $biography;
         $self->genres = $genres;
         return $self;
@@ -50,6 +52,14 @@ class Profile
     public function setImage($image)
     {
         $this->image = $image;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**

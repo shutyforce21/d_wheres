@@ -16,6 +16,7 @@ class UpdateUserProfileRequest extends FormRequest
         return [
             'background' => '背景画像',
             'image' => 'プロフィール画像',
+            'name' => '名前',
             'biography' => 'Bio',
             'genres' => 'ジャンル',
         ];
@@ -41,6 +42,7 @@ class UpdateUserProfileRequest extends FormRequest
         return [
             'background' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'],
             'image' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'],
+            'name' => ['required', 'string'],
             'biography' => ['nullable', 'string'],
             'genres' => ['nullable', 'array'],
             'genres.*' => ['integer', 'exists:genres,id'],
@@ -86,6 +88,7 @@ class UpdateUserProfileRequest extends FormRequest
         return new InputData(
             $data['background'],
             $data['image'],
+            $data['name'],
             $this->spaceTrim($data['biography']),
             $data['genres']
         );

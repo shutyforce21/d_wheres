@@ -65,6 +65,7 @@ class Repository implements RepositoryInterface
                 Profile::fromRepository(
                     optional($userModel->profile)->background,
                     optional($userModel->profile)->image,
+                    $userModel->profile->name,
                     optional($userModel->profile)->biography,
                     optional($userModel->profile)->genres
                 )
@@ -97,6 +98,7 @@ class Repository implements RepositoryInterface
                 ], [
                     'image' => $user->getProfile()->getImage(),
                     'background' => $user->getProfile()->getBackgroundImage(),
+                    'name' => $user->getProfile()->getName(),
                     'biography' => $user->getProfile()->getBiography()
                 ]
             );

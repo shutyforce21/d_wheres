@@ -32,6 +32,7 @@ class UpdateProfile
         $userEntity = $this->repository->findById($userId);
 
         $profile = $userEntity->getProfile();
+        $profile->setName($inputData->getName());
         $profile->setBiography($inputData->getBiography());
         $profile->setGenres($inputData->getGenres());
 

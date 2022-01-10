@@ -19,7 +19,7 @@ class ProfileController extends Controller
     public function update(UpdateUserProfileRequest $request, UpdateProfile $useCase)
     {
         $authId = Auth::id();
-//        try {
+        try {
             $inputData = $request->getInputData();
             $useCase->handle($inputData, $authId);
 
@@ -28,12 +28,12 @@ class ProfileController extends Controller
                 Response::HTTP_OK
             );
 
-//        } catch (\Throwable $throwable) {
-//            return response()->json(
-//                ['message' => $throwable->getMessage()],
-//                Response::HTTP_INTERNAL_SERVER_ERROR
-//            );
-//        }
+        } catch (\Throwable $throwable) {
+            return response()->json(
+                ['message' => $throwable->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**
