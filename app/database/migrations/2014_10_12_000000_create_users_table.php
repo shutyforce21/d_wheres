@@ -23,7 +23,6 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->comment('ユーザーID');
-            $table->string('name')->comment('名前');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->string('password');
             $table->rememberToken();
@@ -34,6 +33,7 @@ class CreateUsersTable extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users');
+            $table->string('name')->comment('名前');
             $table->string('image')->nullable()->comment('イメージ画像');
             $table->string('background')->nullable()->comment('背景画像');
             $table->tinyText('biography')->nullable()->comment('自己紹介');

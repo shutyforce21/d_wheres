@@ -23,14 +23,19 @@ class RegisterUserTest extends TestCase
 
         // ユーザー情報が保存されているか
         $this->assertDatabaseHas('users', [
-            'name' => $data['name'],
             'email' => $data['email']
         ]);
 
         $userModel = User::orderBy('created_at', 'desc')->first();
-
+        // パスワードアサーション
         $bool = password_verify($data['password'], $userModel->password);
         $this->assertTrue($bool);
+
+        // プロフィールに名前が登録されているか
+        $this->assertDatabaseHas('profiles', [
+            'user_id' => $userModel->id,
+            'name' => $data['name']
+        ]);
     }
 
     /**
