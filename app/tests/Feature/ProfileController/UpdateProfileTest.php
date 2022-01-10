@@ -20,7 +20,7 @@ class UpdateProfileTest extends TestCase
         parent::setUp();
         $loginResponse = $this->postJson(
             '/api/login',
-            ['email' => 'asdf1@asdf.com', 'password' => 'password']
+            ['email' => 'asdf2@asdf.com', 'password' => 'password']
         );
 
         $authToken = $loginResponse->getOriginalContent()['data']['token'];
@@ -36,20 +36,26 @@ class UpdateProfileTest extends TestCase
      */
     public function 「正常系」ユーザーがプロフールを更新する($data)
     {
+        //初回登録データ
+        $firstCreatedData = $data[0];
+        //更新データ
+        $updatedData = $data[1];
+
+        // 初回登録
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '.$this->authToken
-        ])->put("/api/profiles", $data);
+        ])->put("/api/profiles", $firstCreatedData);
         $response->assertSuccessful();
 
         // プロフィール情報が保存されているか
         $this->assertDatabaseHas('profiles', [
             'user_id' => $this->userId,
-            'name' => $data['name'],
-            'biography' => $data['biography']
+            'name' => $firstCreatedData['name'],
+            'biography' => $firstCreatedData['biography']
         ]);
 
         // ジャンルが登録されているか
-        foreach ($data['genres'] as $genreId) {
+        foreach ($firstCreatedData['genres'] as $genreId) {
             $this->assertDatabaseHas('user_genre', [
                 'user_id' => $this->userId,
                 'genre_id' => $genreId
@@ -61,16 +67,54 @@ class UpdateProfileTest extends TestCase
         $profileModel = $userModel->profile;
 
         // プロフィールのイメージパスを取得
-        $imagePath = str_replace('storage','public',  $profileModel->image);
+        $firstCreatedImagePath = str_replace('storage','public',  $profileModel->image);
         // プロフィールの背景イメージパスを取得
-        $backgroundImgPath = str_replace('storage','public',  $profileModel->background);
+        $firstCreatedBackgroundImgPath = str_replace('storage','public',  $profileModel->background);
 
         // プロフィールのイメージがstorageに存在するか
-        $this->assertTrue(Storage::exists($imagePath));
+        $this->assertTrue(Storage::exists($firstCreatedImagePath));
         // プロフィールの背景イメージがstorageに存在するか
-        $this->assertTrue(Storage::exists($backgroundImgPath));
+        $this->assertTrue(Storage::exists($firstCreatedBackgroundImgPath));
+
+        // アップデート
+        $response = $this->withHeaders([
+            'Authorization' => 'Bearer '.$this->authToken
+        ])->put("/api/profiles", $updatedData);
+        $response->assertSuccessful();
+
+        // プロフィール情報が保存されているか
+        $this->assertDatabaseHas('profiles', [
+            'user_id' => $this->userId,
+            'name' => $updatedData['name'],
+            'biography' => $updatedData['biography']
+        ]);
+
+        // ジャンルが登録されているか
+        foreach ($updatedData['genres'] as $genreId) {
+            $this->assertDatabaseHas('user_genre', [
+                'user_id' => $this->userId,
+                'genre_id' => $genreId
+            ]);
+        }
+        //ユーザーモデル取得
+        $updatedUserModel = User::find($this->userId);
+        $updatedProfileModel = $userModel->profile;
+
+        // プロフィールのイメージパスを取得
+        $updatedImagePath = str_replace('storage','public',  $updatedProfileModel->image);
+        // プロフィールの背景イメージパスを取得
+        $updatedBackgroundImgPath = str_replace('storage','public',  $updatedProfileModel->background);
+        dd($updatedImagePath);
+        // 初回登録時のファイルがstorageから削除されている
+        $this->assertFalse(Storage::exists($firstCreatedImagePath));
+        $this->assertFalse(Storage::exists($firstCreatedBackgroundImgPath));
+
+        // 初回登録時のファイルがstorageから削除されている
+        $this->assertTrue(Storage::exists($updatedImagePath));
+        $this->assertTrue(Storage::exists($updatedBackgroundImgPath));
+
         // ディレクトリごと削除
-        $this->assertTrue(Storage::deleteDirectory("public/user/{$userModel->code}/"));
+        $this->assertTrue(Storage::deleteDirectory("public/user/{$updatedUserModel->code}/"));
     }
 
     public function 「異常系」ユーザーがプロフールを更新する($data){}
@@ -83,12 +127,20 @@ class UpdateProfileTest extends TestCase
     public function initData()
     {
         yield [
-            'data' => [
-                'background' => UploadedFile::fake()->create('bg-image.jpg')->size(499),
-                'image' => UploadedFile::fake()->create('image.jpg')->size(499),
-                'name' => 'test dancer1 updated',
-                'biography' => 'こちらはユーザーのプロフィール情報になります。',
-                'genres' => [1,2]
+            'data' =>[
+                [
+                    'background' => UploadedFile::fake()->create('bg-image.jpg')->size(499),
+                    'image' => UploadedFile::fake()->create('image.jpg')->size(499),
+                    'name' => 'first created name',
+                    'biography' => 'This is first created biography content explained profile',
+                    'genres' => [1,2]
+                ], [
+                    'background' => UploadedFile::fake()->create('bg-image2.jpg')->size(499),
+                    'image' => UploadedFile::fake()->create('image2.jpg')->size(499),
+                    'name' => 'updated name',
+                    'biography' => 'This is updated content biography explained profile',
+                    'genres' => [1,2,3]
+                ]
             ]
         ];
     }
