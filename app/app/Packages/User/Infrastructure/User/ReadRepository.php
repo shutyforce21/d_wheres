@@ -33,10 +33,10 @@ class ReadRepository implements ReadRepositoryInterface
             $readUser = new ReadUser(
                 $userModel->id,
                 $userModel->code,
-                $userModel->name,
                 new ReadProfile(
                     optional($userModel->profile)->image,
                     optional($userModel->profile)->background,
+                    $userModel->profile->name,
                     $userModel->follows->count(),
                     $userModel->followers->count(),
                     optional($userModel->profile)->biography,

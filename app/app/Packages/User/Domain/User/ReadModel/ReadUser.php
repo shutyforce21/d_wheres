@@ -9,20 +9,17 @@ class ReadUser
 {
     private int $id;
     private string $code;
-    private string $name;
     private ReadProfile $profile;
     private bool $isSelf;
 
     public function __construct(
         $id,
         $code,
-        $name,
         ReadProfile $profile
     )
     {
         $this->id = $id;
         $this->code = $code;
-        $this->name = $name;
         $this->profile = $profile;
         $this->isSelf = false;
     }
@@ -49,14 +46,6 @@ class ReadUser
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**

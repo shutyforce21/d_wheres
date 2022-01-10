@@ -13,10 +13,10 @@ class ProfileResource
         return [
             'id' => $user->getId(),
             'code' => $user->getCode(),
-            'name' => $user->getName(),
             'profile' => [
                 'image' => $user->getProfile()->getImage(),
                 'background' => $user->getProfile()->getBackgroundImage(),
+                'name' => $user->getProfile()->getName(),
                 'follows' => $user->getProfile()->getFollows(),
                 'followers' => $user->getProfile()->getFollowers(),
                 'biography' => $user->getProfile()->getBiography(),
