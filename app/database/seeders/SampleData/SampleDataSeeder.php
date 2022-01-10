@@ -13,27 +13,22 @@ class SampleDataSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'code' => 'a1s2d3f1001',
-                'name' => 'dancer name1',
                 'email' => 'asdf1@asdf.com',
                 'password' => Hash::make('password')
             ],[
                 'code' => 'a1s2d3f1002',
-                'name' => 'dancer name2',
                 'email' => 'asdf2@asdf.com',
                 'password' => Hash::make('password')
             ],[
                 'code' => 'a1s2d3f1003',
-                'name' => 'dancer name3',
                 'email' => 'asdf3@asdf.com',
                 'password' => Hash::make('password')
             ],[
                 'code' => 'a1s2d3f1004',
-                'name' => 'dancer name4',
                 'email' => 'asdf4@asdf.com',
                 'password' => Hash::make('password')
             ],[
                 'code' => 'a1s2d3f1005',
-                'name' => 'dancer name5',
                 'email' => 'asdf5@asdf.com',
                 'password' => Hash::make('password')
             ],
@@ -42,9 +37,26 @@ class SampleDataSeeder extends Seeder
         DB::table('profiles')->insert([
             [
                 'user_id' => 1,
+                'name' => 'test dancer1',
                 'image' => "/image/sample/user.jpg",
                 'background' => "/image/sample/background.jpg",
                 'biography' => "Thank you coming my page!!\nThis is my dance profile and I like HipHop, Breakin"
+            ]
+        ]);
+
+        DB::table('profiles')->insert([
+            [
+                'user_id' => 2,
+                'name' => 'test dancer2',
+            ],[
+                'user_id' => 3,
+                'name' => 'test dancer3',
+            ],[
+                'user_id' => 4,
+                'name' => 'test dancer4',
+            ],[
+                'user_id' => 5,
+                'name' => 'test dancer5',
             ]
         ]);
 

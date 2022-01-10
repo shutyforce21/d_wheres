@@ -30,11 +30,10 @@ class UpdateProfile
     {
         //userEntityを呼び出す
         $userEntity = $this->repository->findById($userId);
-        //profileEntityを作成
-        $profile = Profile::reconstruct(
-            $inputData->getBiography(),
-            $inputData->getGenres()
-        );
+
+        $profile = $userEntity->getProfile();
+        $profile->setBiography($inputData->getBiography());
+        $profile->setGenres($inputData->getGenres());
 
         // 背景イメージの永続化
         $imgPath = $this->fileRepository->updateBackgroundImage($inputData->getBackgroundImage(), $userEntity->getCode());

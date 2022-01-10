@@ -8,6 +8,7 @@ class Profile
 {
     private ?string $backgroundImage;
     private ?string $image;
+    private string $name;
     private ?string $biography;
     private ?array $genres;
 
@@ -28,14 +29,10 @@ class Profile
         return $self;
     }
 
-    public static function reconstruct(
-        $biography,
-        $genres
-    )
+    public static function reconstruct($name)
     {
         $self = new self();
-        $self->biography = $biography;
-        $self->genres = $genres;
+        $self->name = $name;
         return $self;
     }
 
@@ -56,6 +53,22 @@ class Profile
     }
 
     /**
+     * @param string|null $biography
+     */
+    public function setBiography($biography)
+    {
+        $this->biography = $biography;
+    }
+
+    /**
+     * @param array|null $genres
+     */
+    public function setGenres($genres)
+    {
+        $this->genres = $genres;
+    }
+
+    /**
      * @return string|null
      */
     public function getBackgroundImage()
@@ -69,6 +82,14 @@ class Profile
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**

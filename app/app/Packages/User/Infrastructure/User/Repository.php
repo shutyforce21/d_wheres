@@ -31,14 +31,20 @@ class Repository implements RepositoryInterface
      */
     public function save(User $user)
     {
+        DB::beginTransaction();
         try {
             $this->userModel->code = $user->getCode();
-            $this->userModel->name = $user->getName();
             $this->userModel->email = $user->getEmail();
             $this->userModel->password = $user->getPassword();
             $this->userModel->save();
 
+            $this->profileModel->user_id = $this->userModel->id;
+            $this->profileModel->name = $user->getProfile()->getname();
+            $this->profileModel->save();
+            DB::commit();
+
         } catch (\Throwable $throwable) {
+            DB::rollBack();
             logger()->info($throwable->getMessage());
             throw new \Exception($throwable->getMessage());
         }

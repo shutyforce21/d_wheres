@@ -10,7 +10,6 @@ class User
 {
     private int $id;
     private string $code;
-    private string $name;
     private string $email;
     private Password $password;
     private Profile $profile;
@@ -30,16 +29,16 @@ class User
      */
     public static function reconstruct(
         $code,
-        $name,
         $email,
-        Password $password
+        Password $password,
+        Profile $profile
     )
     {
         $self = new self();
         $self->code = $code;
-        $self->name = $name;
         $self->email = $email;
         $self->password = $password;
+        $self->profile = $profile;
         return $self;
     }
 
@@ -166,14 +165,6 @@ class User
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
     /**
