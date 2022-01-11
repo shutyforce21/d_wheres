@@ -37,13 +37,15 @@ class UpdateProfile
         $profile->setGenres($inputData->getGenres());
 
         // 背景イメージの永続化
-        $imgPath = $this->fileRepository->updateBackgroundImage($inputData->getBackgroundImage(), $userEntity->getCode());
-        //profileEntityにpathをセット
-        $profile->setBackgroundImage($imgPath);
+        $backgroundImgPath = $this->fileRepository->updateBackgroundImage(
+            $inputData->getBackgroundImage(), $userEntity->getCode()
+        );
+        $profile->setBackgroundImage($backgroundImgPath);
 
         // イメージの永続化
-        $imgPath = $this->fileRepository->updateImage($inputData->getImage(), $userEntity->getCode());
-        //profileEntityにpathをセット
+        $imgPath = $this->fileRepository->updateImage(
+            $inputData->getImage(), $userEntity->getCode()
+        );
         $profile->setImage($imgPath);
 
         //userEntityにprofileEntityをセット

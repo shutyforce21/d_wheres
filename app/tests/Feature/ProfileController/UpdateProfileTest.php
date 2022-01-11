@@ -98,13 +98,13 @@ class UpdateProfileTest extends TestCase
         }
         //ユーザーモデル取得
         $updatedUserModel = User::find($this->userId);
-        $updatedProfileModel = $userModel->profile;
+        $updatedProfileModel = $updatedUserModel->profile;
 
         // プロフィールのイメージパスを取得
         $updatedImagePath = str_replace('storage','public',  $updatedProfileModel->image);
         // プロフィールの背景イメージパスを取得
         $updatedBackgroundImgPath = str_replace('storage','public',  $updatedProfileModel->background);
-        dd($updatedImagePath);
+
         // 初回登録時のファイルがstorageから削除されている
         $this->assertFalse(Storage::exists($firstCreatedImagePath));
         $this->assertFalse(Storage::exists($firstCreatedBackgroundImgPath));
@@ -135,8 +135,8 @@ class UpdateProfileTest extends TestCase
                     'biography' => 'This is first created biography content explained profile',
                     'genres' => [1,2]
                 ], [
-                    'background' => UploadedFile::fake()->create('bg-image2.jpg')->size(499),
-                    'image' => UploadedFile::fake()->create('image2.jpg')->size(499),
+                    'background' => UploadedFile::fake()->create('bg-image3.jpg')->size(499),
+                    'image' => UploadedFile::fake()->create('image3.jpg')->size(499),
                     'name' => 'updated name',
                     'biography' => 'This is updated content biography explained profile',
                     'genres' => [1,2,3]

@@ -92,7 +92,7 @@ class Repository implements RepositoryInterface
     {
         DB::beginTransaction();
         try {
-            ProfileModel::updateOrCreate(
+            $this->profileModel->updateOrCreate(
                 [
                     'user_id' => $user->getId()
                 ], [
