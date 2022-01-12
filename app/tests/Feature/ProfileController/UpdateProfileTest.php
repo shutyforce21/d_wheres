@@ -105,8 +105,9 @@ class UpdateProfileTest extends TestCase
         // プロフィールの背景イメージパスを取得
         $updatedBackgroundImgPath = str_replace('storage','public',  $updatedProfileModel->background);
 
+        // 文字列の場合は更新しない
+        $this->assertTrue(Storage::exists($firstCreatedImagePath));
         // 初回登録時のファイルがstorageから削除されている
-        $this->assertFalse(Storage::exists($firstCreatedImagePath));
         $this->assertFalse(Storage::exists($firstCreatedBackgroundImgPath));
 
         // 初回登録時のファイルがstorageから削除されている
@@ -136,7 +137,7 @@ class UpdateProfileTest extends TestCase
                     'genres' => [1,2]
                 ], [
                     'background' => UploadedFile::fake()->create('bg-image3.jpg')->size(499),
-                    'image' => UploadedFile::fake()->create('image3.jpg')->size(499),
+                    'image' => 'storage/asdf/asdf/sample.com',
                     'name' => 'updated name',
                     'biography' => 'This is updated content biography explained profile',
                     'genres' => [1,2,3]

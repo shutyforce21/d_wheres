@@ -39,9 +39,23 @@ class UpdateUserProfileRequest extends FormRequest
      */
     public function rules()
     {
+        // 変更がない場合は文字列を返す。
+        if(is_object($this->all()['image']) === true) {
+            $imageFileValidation = ['required', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'];
+        } else {
+            $imageFileValidation = ['nullable', 'string'];
+        }
+
+        // 変更がない場合は文字列を返す。
+        if(is_object($this->all()['background']) === true) {
+            $backgroundFileValidation = ['required', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'];
+        } else {
+            $backgroundFileValidation = ['nullable', 'string'];
+        }
+
         return [
-            'background' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'],
-            'image' => ['nullable', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'],
+            'background' => $backgroundFileValidation,
+            'image' => $imageFileValidation,
             'name' => ['required', 'string'],
             'biography' => ['nullable', 'string'],
             'genres' => ['nullable', 'array'],
