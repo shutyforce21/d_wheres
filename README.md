@@ -20,6 +20,8 @@ D_Wheres
 
 UI部分はhttps://github.com/shutyforce21/d_wheres_front_web
 
+※ mapbox使用
+
 ### 開発サイクル
 
 ① FeatureTest作成
