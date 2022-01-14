@@ -8,6 +8,7 @@ use App\Packages\User\UseCase\Spot\Get\GetSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
 use App\Packages\User\UseCase\Spot\Show\ShowSpot;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class SpotController extends Controller
@@ -44,8 +45,8 @@ class SpotController extends Controller
      */
     public function store(RegisterSpotRequest $request, RegisterSpot $useCase)
     {
-        // $userId = Auth::id();
-        $userId = 1;
+        dd('activateカラム追加して審査OKなら登録(1~2日後に)！');
+        $userId = Auth::id();
         $inputData = $request->getInputData();
         try {
             $useCase->handle($inputData, $userId);
