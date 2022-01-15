@@ -1,6 +1,5 @@
 <?php
 
-use app\packages\Tmp;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//管理画面
+Route::get('/admin/spots', [\App\Http\Controllers\Admin\SpotController::class, 'index']);
