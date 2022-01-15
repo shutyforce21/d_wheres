@@ -17,6 +17,10 @@ class Spot
     private ?string $content;
     private GeometricLocation $location;
     private AvailableTime $availableTime;
+    private bool $isActive;
+
+    const ACTIVE = true; //有効
+    const INACTIVE = false; //無効
 
     private function __construct(){}
 
@@ -38,6 +42,7 @@ class Spot
         $self->content = $content;
         $self->location = $location;
         $self->availableTime = $availableTime;
+        $self->isActive = self::INACTIVE;
         return $self;
     }
 
