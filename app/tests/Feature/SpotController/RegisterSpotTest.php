@@ -42,7 +42,10 @@ class RegisterSpotTest extends TestCase
             'name' => $data['name'],
             'prefecture_id' => $data['prefecture_id'],
             'address' => $data['address'],
-            'content' => $data['content']
+            'content' => $data['content'],
+            'open_on' => $data['open_on'],
+            'close_on' => $data['close_on'],
+            'active' => false
         ]);
 
         $spotModel = Spot::orderBy('created_at', 'desc')->first();
