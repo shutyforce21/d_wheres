@@ -45,7 +45,6 @@ class SpotController extends Controller
      */
     public function store(RegisterSpotRequest $request, RegisterSpot $useCase)
     {
-        dd('activateカラム追加して審査OKなら登録(1~2日後に)！');
         $userId = Auth::id();
         $inputData = $request->getInputData();
         try {

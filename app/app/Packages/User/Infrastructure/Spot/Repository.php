@@ -37,6 +37,7 @@ class Repository implements RepositoryInterface
             $this->spotModel->open_on = $spot->getAvailableTime()->getOpenOn();
             $this->spotModel->close_on = $spot->getAvailableTime()->getCloseOn();
             $this->spotModel->create_user_id = $userId;
+            $this->spotModel->active = $spot->getActiveFlag();
             $this->spotModel->save();
             DB::commit();
 
