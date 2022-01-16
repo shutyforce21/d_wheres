@@ -21,21 +21,20 @@ class RegisterUserTest extends TestCase
         $loginResponse = $this->postJson('/api/register', $data);
         $loginResponse->assertSuccessful();
 
-        // ユーザー情報が保存されているか
-        $this->assertDatabaseHas('users', [
-            'email' => $data['email']
-        ]);
-
         $userModel = User::orderBy('created_at', 'desc')->first();
+        // ユーザー情報が保存されているか
+        $this->assertEquals([$userModel->email],[$data['email']]);
+        $this->assertFalse(empty($userModel->code));
+
         // パスワードアサーション
         $bool = password_verify($data['password'], $userModel->password);
         $this->assertTrue($bool);
 
-        // プロフィールに名前が登録されているか
-        $this->assertDatabaseHas('profiles', [
-            'user_id' => $userModel->id,
-            'name' => $data['name']
-        ]);
+        // プロフィールに名前と初期ユーザーコードが登録されているか
+        $profile = $userModel->profile;
+        $this->assertEquals([$profile->name],[$data['name']]);
+        $this->assertFalse(empty($profile->user_code));
+
     }
 
     /**
