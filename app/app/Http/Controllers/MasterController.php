@@ -19,10 +19,13 @@ class MasterController
             ];
         })->toArray();
 
+        $prefectures = config('data.prefectures');
+
         return response()->json([
             'message' => 'success',
             'data' => [
-                'genres' => $genres
+                'genres' => $genres,
+                'prefectures' => $prefectures
             ]
         ], Response::HTTP_OK);
     }
