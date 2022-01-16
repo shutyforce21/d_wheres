@@ -27,6 +27,7 @@ Route::middleware('auth:users')->group(function() {
 
 //ゲスト&認証ユーザーのみ
 Route::resource('/spots', SpotController::class)->only(['index', 'show']);
+Route::resource('/users', \App\Http\Controllers\UserController::class)->only(['index']);
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 // ログイン

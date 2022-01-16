@@ -115,9 +115,9 @@ class ReadSpot
     public function getImage()
     {
         if ($this->image) {
-            $imgPath = ImagePath::getAbsolutePath($this->image);
+            return ImagePath::getAbsolutePath($this->image);
         }
-        return $imgPath;
+        return null;
     }
 
     /**
