@@ -51,6 +51,7 @@ class UpdateProfileTest extends TestCase
         $this->assertDatabaseHas('profiles', [
             'user_id' => $this->userId,
             'name' => $firstCreatedData['name'],
+            'user_code' => $firstCreatedData['user_code'],
             'biography' => $firstCreatedData['biography']
         ]);
 
@@ -86,6 +87,7 @@ class UpdateProfileTest extends TestCase
         $this->assertDatabaseHas('profiles', [
             'user_id' => $this->userId,
             'name' => $updatedData['name'],
+            'user_code' => $updatedData['user_code'],
             'biography' => $updatedData['biography']
         ]);
 
@@ -132,12 +134,14 @@ class UpdateProfileTest extends TestCase
                 [
                     'background' => UploadedFile::fake()->create('bg-image.jpg')->size(499),
                     'image' => UploadedFile::fake()->create('image.jpg')->size(499),
+                    'user_code' => 'sample12345',
                     'name' => 'first created name',
                     'biography' => 'This is first created biography content explained profile',
                     'genres' => [1,2]
                 ], [
                     'background' => UploadedFile::fake()->create('bg-image3.jpg')->size(499),
                     'image' => 'storage/asdf/asdf/sample.com',
+                    'user_code' => 'sample12345678910',
                     'name' => 'updated name',
                     'biography' => 'This is updated content biography explained profile',
                     'genres' => [1,2,3]

@@ -5,6 +5,7 @@ namespace Database\Seeders\SampleData;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use function Webmozart\Assert\Tests\StaticAnalysis\uuid;
 
 class SampleDataSeeder extends Seeder
 {
@@ -37,6 +38,7 @@ class SampleDataSeeder extends Seeder
         DB::table('profiles')->insert([
             [
                 'user_id' => 1,
+                'user_code' => uniqid(),
                 'name' => 'test dancer1',
                 'image' => "/image/sample/user.jpg",
                 'background' => "/image/sample/background.jpg",
@@ -47,15 +49,19 @@ class SampleDataSeeder extends Seeder
         DB::table('profiles')->insert([
             [
                 'user_id' => 2,
+                'user_code' => uniqid(),
                 'name' => 'test dancer2',
             ],[
                 'user_id' => 3,
+                'user_code' => uniqid(),
                 'name' => 'test dancer3',
             ],[
                 'user_id' => 4,
+                'user_code' => uniqid(),
                 'name' => 'test dancer4',
             ],[
                 'user_id' => 5,
+                'user_code' => uniqid(),
                 'name' => 'test dancer5',
             ]
         ]);
