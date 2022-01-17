@@ -11,10 +11,11 @@ use App\Packages\User\UseCase\Spot\Register\Dto\InputData;
 class SpotFactory
 {
     const TABLE_NAME = 'spots';
+    const UNIQUE_CODE_FILED_NAME = 'code';
 
     public static function create(InputData $inputData)
     {
-        $code = UniqueCode::create(self::TABLE_NAME);
+        $code = UniqueCode::create(self::TABLE_NAME, self::UNIQUE_CODE_FILED_NAME);
 
         $spot = Spot::reconstruct(
             $code,
