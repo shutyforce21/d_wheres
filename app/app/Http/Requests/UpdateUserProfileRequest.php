@@ -8,6 +8,8 @@ use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class UpdateUserProfileRequest extends FormRequest
 {
@@ -17,6 +19,7 @@ class UpdateUserProfileRequest extends FormRequest
             'background' => '背景画像',
             'image' => 'プロフィール画像',
             'name' => '名前',
+            'user_code' => 'ユーザーコード',
             'biography' => 'Bio',
             'genres' => 'ジャンル',
         ];
@@ -57,6 +60,7 @@ class UpdateUserProfileRequest extends FormRequest
             'background' => $backgroundFileValidation,
             'image' => $imageFileValidation,
             'name' => ['required', 'string'],
+            'user_code' => ['required', 'string', Rule::unique('profiles','user_code')->ignore(Auth::id())],
             'biography' => ['nullable', 'string'],
             'genres' => ['nullable', 'array'],
             'genres.*' => ['integer', 'exists:genres,id'],
@@ -103,6 +107,7 @@ class UpdateUserProfileRequest extends FormRequest
             $data['background'],
             $data['image'],
             $data['name'],
+            $data['user_code'],
             $this->spaceTrim($data['biography']),
             $data['genres']
         );

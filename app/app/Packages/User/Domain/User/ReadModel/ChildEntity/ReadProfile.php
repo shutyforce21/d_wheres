@@ -9,6 +9,7 @@ class ReadProfile
     private ?string $image;
     private ?string $backgroundImage;
     private string $name;
+    private string $userCode;
     private ?string $biography;
     private ?array $genres;
     private ?int $follows;
@@ -18,6 +19,7 @@ class ReadProfile
         $image,
         $backgroundImage,
         $name,
+        $userCode,
         $follows,
         $followers,
         $biography,
@@ -27,6 +29,7 @@ class ReadProfile
         $this->image = $image;
         $this->backgroundImage = $backgroundImage;
         $this->name = $name;
+        $this->userCode = $userCode;
         $this->follows = $follows;
         $this->followers = $followers;
         $this->biography = $biography;
@@ -55,6 +58,14 @@ class ReadProfile
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserCode()
+    {
+        return $this->userCode;
     }
 
     /**

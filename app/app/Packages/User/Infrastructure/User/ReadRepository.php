@@ -37,6 +37,7 @@ class ReadRepository implements ReadRepositoryInterface
                     optional($userModel->profile)->image,
                     optional($userModel->profile)->background,
                     $userModel->profile->name,
+                    $userModel->profile->user_code,
                     $userModel->follows->count(),
                     $userModel->followers->count(),
                     optional($userModel->profile)->biography,

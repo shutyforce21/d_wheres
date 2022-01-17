@@ -39,7 +39,8 @@ class Repository implements RepositoryInterface
             $this->userModel->save();
 
             $this->profileModel->user_id = $this->userModel->id;
-            $this->profileModel->name = $user->getProfile()->getname();
+            $this->profileModel->user_code = $user->getProfile()->getUserCode();
+            $this->profileModel->name = $user->getProfile()->getName();
             $this->profileModel->save();
             DB::commit();
 
@@ -66,6 +67,7 @@ class Repository implements RepositoryInterface
                     optional($userModel->profile)->background,
                     optional($userModel->profile)->image,
                     $userModel->profile->name,
+                    $userModel->profile->user_code,
                     optional($userModel->profile)->biography,
                     optional($userModel->profile)->genres
                 )
@@ -99,6 +101,7 @@ class Repository implements RepositoryInterface
                     'image' => $user->getProfile()->getImage(),
                     'background' => $user->getProfile()->getBackgroundImage(),
                     'name' => $user->getProfile()->getName(),
+                    'user_code' => $user->getProfile()->getUserCode(),
                     'biography' => $user->getProfile()->getBiography()
                 ]
             );

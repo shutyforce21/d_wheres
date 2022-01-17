@@ -9,6 +9,7 @@ class Profile
     private ?string $backgroundImage;
     private ?string $image;
     private string $name;
+    private string $userCode;
     private ?string $biography;
     private ?array $genres;
 
@@ -18,6 +19,7 @@ class Profile
         $backgroundImage,
         $image,
         $name,
+        $userCode,
         $biography,
         $genres
     )
@@ -26,15 +28,17 @@ class Profile
         $self->backgroundImage = $backgroundImage;
         $self->image = $image;
         $self->name = $name;
+        $self->userCode = $userCode;
         $self->biography = $biography;
         $self->genres = $genres;
         return $self;
     }
 
-    public static function reconstruct($name)
+    public static function reconstruct($name, $userCode)
     {
         $self = new self();
         $self->name = $name;
+        $self->userCode = $userCode;
         return $self;
     }
 
@@ -60,6 +64,14 @@ class Profile
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @param string $userCode
+     */
+    public function setUserCode($userCode)
+    {
+        $this->userCode = $userCode;
     }
 
     /**
@@ -92,6 +104,14 @@ class Profile
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserCode()
+    {
+        return $this->userCode;
     }
 
     /**

@@ -35,6 +35,7 @@ class UpdateProfile
         $profile->setName($inputData->getName());
         $profile->setBiography($inputData->getBiography());
         $profile->setGenres($inputData->getGenres());
+        $profile->setUserCode($inputData->getUserCode());
 
         // 背景イメージの永続化
         // 文字列(path)の場合は更新しない。

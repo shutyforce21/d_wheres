@@ -7,6 +7,7 @@ class InputData
     private $backgroundImage;
     private $image;
     private string $name;
+    private string $userCode;
     private ?string $biography;
     private ?array $genres;
 
@@ -14,6 +15,7 @@ class InputData
         $backgroundImage,
         $image,
         $name,
+        $userCode,
         $biography,
         $genres
     )
@@ -21,6 +23,7 @@ class InputData
         $this->backgroundImage = $backgroundImage;
         $this->image = $image;
         $this->name = $name;
+        $this->userCode = $userCode;
         $this->biography = $biography;
         $this->genres = $genres;
     }
@@ -47,6 +50,14 @@ class InputData
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserCode()
+    {
+        return $this->userCode;
     }
 
     /**
