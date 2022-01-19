@@ -19,17 +19,17 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request, RegisterUser $useCase)
     {
         $inputData = $request->getInputData();
-//        try {
+        try {
             $useCase->handle($inputData);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK);
 
-//        } catch (\Throwable $throwable) {
-//            return response()->json(
-//                ['message' => $throwable->getMessage()],
-//                Response::HTTP_INTERNAL_SERVER_ERROR);
-//        }
+        } catch (\Throwable $throwable) {
+            return response()->json(
+                ['message' => $throwable->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
