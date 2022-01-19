@@ -52,9 +52,9 @@ Route::middleware('auth:users')->group(function() {
     Route::get('/followers', [\App\Http\Controllers\FollowController::class, 'getFollowers']);
 });
 
-Route::get('u', function () {
-
-});
+//TODO
+// map用spot検索Controller作成
+//
 
 ?>
 
