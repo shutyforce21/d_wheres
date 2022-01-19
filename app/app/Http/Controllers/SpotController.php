@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterSpotRequest;
 use App\Http\Resources\SpotResource;
-use App\Packages\User\UseCase\Spot\Get\GetSpots;
+use App\Packages\User\UseCase\Spot\Search\SearchSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
 use App\Packages\User\UseCase\Spot\Show\ShowSpot;
 use Illuminate\Http\Response;
@@ -15,10 +15,30 @@ class SpotController extends Controller
 {
     /**
      * (メモ) ログインしていれば、誰がいるかとか、場所の詳細を確認できる。
-     * @param GetSpots $useCase
+     * @param SearchSpots $useCase
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(GetSpots $useCase)
+    public function search(SearchSpots $useCase)
+    {
+        try {
+            $outputData = $useCase->handle();
+            return response()->json(
+                [
+                    'message' => 'success',
+                    'data' => SpotResource::collection($outputData)
+                ],
+                Response::HTTP_OK
+            );
+
+        } catch(Throwable $e) {
+            return response()->json(
+                ['message' => $e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function index(SearchSpots $useCase)
     {
         try {
             $outputData = $useCase->handle();

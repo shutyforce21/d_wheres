@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Packages\User\UseCase\Spot\Get;
+namespace App\Packages\User\UseCase\Spot\Search;
 
 use App\Packages\User\Infrastructure\Spot\ReadRepositoryInterface;
 
-class GetSpots
+class SearchSpots
 {
     private $readRepository;
 

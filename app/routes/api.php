@@ -26,7 +26,10 @@ Route::middleware('auth:users')->group(function() {
 });
 
 //ゲスト&認証ユーザーのみ
-Route::resource('/spots', SpotController::class)->only(['index', 'show']);
+Route::get('/spots', [SpotController::class, 'index']);
+Route::get('/spots/{spot_id}', [SpotController::class, 'show']);
+Route::get('/spots/search', [SpotController::class, 'search']);
+
 Route::resource('/users', \App\Http\Controllers\UserController::class)->only(['index']);
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
@@ -51,10 +54,6 @@ Route::middleware('auth:users')->group(function() {
     // フォロー中のユーザーを取得する
     Route::get('/followers', [\App\Http\Controllers\FollowController::class, 'getFollowers']);
 });
-
-//TODO
-// map用spot検索Controller作成
-//
 
 ?>
 
