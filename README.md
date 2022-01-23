@@ -104,6 +104,8 @@ app/Packages
         │   │   ├── Dto
         │   │   │   └── InputData.php
         │   │   └── RegisterSpot.php
+        │   ├── Search
+        │   │   └── SearchSpots.php
         │   └── Show
         │       └── ShowSpot.php
         └── User
@@ -117,14 +119,16 @@ app/Packages
             │   ├── Dto
             │   │   └── InputData.php
             │   └── RegisterUser.php
-            ├── RegisterProfile
-            │   ├── Dto
-            │   │   └── InputData.php
-            │   └── RegisterProfile.php
             ├── SearchUser
             │   └── SearchUser.php
-            └── ShowProfile
-                └── ShowProfile.php
+            ├── ShowProfile
+            │   └── ShowProfile.php
+            ├── Unfollow
+            │   └── Unfollow.php
+            └── UpdateProfile
+                ├── Dto
+                │   └── InputData.php
+                └── UpdateProfile.php
 ```
 
 ### testsディレクトリ
