@@ -5,7 +5,6 @@ namespace Database\Seeders\SampleData;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use function Webmozart\Assert\Tests\StaticAnalysis\uuid;
 
 class SampleDataSeeder extends Seeder
 {
@@ -88,14 +87,17 @@ class SampleDataSeeder extends Seeder
         ]);
 
         for ($i=1;$i<50;$i++) {
+            $f = 0.001;
+            $lng = 139.69238 + $f * $i;
+            $lat = 35.68935 + $f * $i;
             $spots[] = [
                 'code' => 'asdfasdf1234'.$i,
                 'name' => '池袋駅東口'. $i,
                 'image' => '/image/sample/spot.jpg',
                 'prefecture_id' => rand(1,2),
-                'address' => '東京都池袋1-2-1',
+                'address' => '東京都仮町区1-2-1 dwheresタワー 1F',
                 'content' => 'こちらに練習場所の詳細を記載できます。',
-                'location' => DB::raw('ST_GeomFromText("POINT(12.12341234 12.12341234)")'),
+                'location' => DB::raw("ST_GeomFromText('POINT({$lng} {$lat})')"),
                 'open_on' => '12:23:45',
                 'close_on' => '12:23:45',
                 'create_user_id' => rand(1,2)
