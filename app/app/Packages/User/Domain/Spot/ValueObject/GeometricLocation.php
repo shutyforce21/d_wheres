@@ -22,11 +22,19 @@ class GeometricLocation
         $this->lng = $lng;
     }
 
-    public function getLat() {
+    /**
+     * @return string
+     */
+    public function getLat()
+    {
         return $this->lat;
     }
 
-    public function getLng(){
+    /**
+     * @return string
+     */
+    public function getLng()
+    {
         return $this->lng;
     }
 

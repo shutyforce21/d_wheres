@@ -86,6 +86,14 @@ class ReadSpot
     }
 
     /**
+     * @param ReadLocation $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
+
+    /**
      * @return int
      */
     public function getId()

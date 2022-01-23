@@ -29,6 +29,27 @@ class SpotResource
      * @param ReadSpot $spot
      * @return array
      */
+    public static function toArrayForMap(ReadSpot $spot)
+    {
+        return [
+            'id' => $spot->getId(),
+            'name' => $spot->getName(),
+            'image' => $spot->getImage(),
+            'location' => [
+                'latitude' => $spot->getLocation()->getLat(),
+                'longitude' => $spot->getLocation()->getLng()
+            ],
+            'available_time' => [
+                'open_on' => $spot->getAvailableTime()->getOpenOn(),
+                'close_on' => $spot->getAvailableTime()->getCloseOn(),
+            ]
+        ];
+    }
+
+    /**
+     * @param ReadSpot $spot
+     * @return array
+     */
     public static function toArrayForDetail(ReadSpot $spot)
     {
         return [
@@ -50,10 +71,17 @@ class SpotResource
         ];
     }
 
-    public static function collection(array $spots)
+    public static function collectionForSearch(array $spots)
     {
         return array_map(function($spot){
             return self::toArrayForPart($spot);
+        }, $spots);
+    }
+
+    public static function collectionForMap(array $spots)
+    {
+        return array_map(function($spot){
+            return self::toArrayForMap($spot);
         }, $spots);
     }
 }

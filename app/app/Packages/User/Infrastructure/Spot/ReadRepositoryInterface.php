@@ -10,6 +10,11 @@ interface ReadRepositoryInterface
     /**
      * @return array
      */
+    public function get();
+
+    /**
+     * @return array
+     */
     public function all();
 
     /**

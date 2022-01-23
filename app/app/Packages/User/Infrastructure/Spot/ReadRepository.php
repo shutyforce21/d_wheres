@@ -28,6 +28,39 @@ class ReadRepository implements ReadRepositoryInterface
     /**
      * @return array
      */
+    public function get()
+    {
+        $rows = $this->spotModel->get();
+
+        if ($rows->isNotEmpty()) {
+            foreach ($rows as $row) {
+                $spot = ReadSpot::reconstructForPart(
+                    $row->id,
+                    $row->name,
+                    $row->image,
+                    $row->address,
+                    new ReadAvailableTime(
+                        $row->open_on,
+                        $row->close_on
+                    )
+                );
+                $spot->setLocation(
+                    new ReadLocation(
+                        $row->lat,
+                        $row->lng
+                    )
+                );
+                $spots[] = $spot;
+            }
+            return $spots;
+
+        }
+        return [];
+    }
+
+    /**
+     * @return array
+     */
     public function all()
     {
         $rows = $this->spotModel->get();

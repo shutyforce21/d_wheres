@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterSpotRequest;
 use App\Http\Resources\SpotResource;
+use App\Packages\User\UseCase\Spot\Get\GetSpots;
 use App\Packages\User\UseCase\Spot\Search\SearchSpots;
 use App\packages\User\UseCase\Spot\Register\RegisterSpot;
 use App\Packages\User\UseCase\Spot\Show\ShowSpot;
@@ -38,14 +39,18 @@ class SpotController extends Controller
         }
     }
 
-    public function index(SearchSpots $useCase)
+    /**
+     * @param GetSpots $useCase
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(GetSpots $useCase)
     {
         try {
             $outputData = $useCase->handle();
             return response()->json(
                 [
                     'message' => 'success',
-                    'data' => SpotResource::collection($outputData)
+                    'data' => SpotResource::collectionForMap($outputData)
                 ],
                 Response::HTTP_OK
             );
