@@ -3,7 +3,6 @@
 
 namespace App\Packages\User\Infrastructure\Spot;
 
-
 use App\Models\Spot as SpotModel;
 use App\Packages\Shared\Service\ImagePath;
 use App\Packages\User\Domain\Spot\ReadModel\ReadSpot;
@@ -16,6 +15,13 @@ class ReadRepository implements ReadRepositoryInterface
 {
     private $spotModel;
 
+    /**
+     * ST_X(location) => longitude(経度)
+     * "ST_Y(location) => latitude(緯度)
+     *
+     * ReadRepository constructor.
+     * @param SpotModel $spotModel
+     */
     public function __construct(SpotModel $spotModel)
     {
         $this->spotModel = $spotModel->selectRaw(
