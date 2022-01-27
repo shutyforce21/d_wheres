@@ -17,7 +17,7 @@ class ReadRepository implements ReadRepositoryInterface
 
     /**
      * ST_X(location) => longitude(経度)
-     * "ST_Y(location) => latitude(緯度)
+     * ST_Y(location) => latitude(緯度)
      *
      * ReadRepository constructor.
      * @param SpotModel $spotModel
