@@ -60,6 +60,10 @@ app/Packages
 └── User
     ├── Domain
     │   ├── Spot
+    │   │   ├── DataAccessInterface
+    │   │   │   ├── FileRepositoryInterface.php
+    │   │   │   ├── ReadRepositoryInterface.php
+    │   │   │   └── RepositoryInterface.php
     │   │   ├── ReadModel
     │   │   │   ├── ReadSpot.php
     │   │   │   └── ValueObject
@@ -73,6 +77,10 @@ app/Packages
     │   └── User
     │       ├── ChildEntity
     │       │   └── Profile.php
+    │       ├── DataAccessInterface
+    │       │   ├── FileRepositoryInterface.php
+    │       │   ├── ReadRepositoryInterface.php
+    │       │   └── RepositoryInterface.php
     │       ├── ReadModel
     │       │   ├── ChildEntity
     │       │   │   └── ReadProfile.php
@@ -84,18 +92,12 @@ app/Packages
     ├── Infrastructure
     │   ├── Spot
     │   │   ├── FileRepository.php
-    │   │   ├── FileRepositoryInterface.php
     │   │   ├── ReadRepository.php
-    │   │   ├── ReadRepositoryInterface.php
-    │   │   ├── Repository.php
-    │   │   └── RepositoryInterface.php
+    │   │   └── Repository.php
     │   └── User
     │       ├── FileRepository.php
-    │       ├── FileRepositoryInterface.php
     │       ├── ReadRepository.php
-    │       ├── ReadRepositoryInterface.php
-    │       ├── Repository.php
-    │       └── RepositoryInterface.php
+    │       └── Repository.php
     └── UseCase
         ├── Spot
         │   ├── Get
