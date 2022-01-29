@@ -1,14 +1,13 @@
 <?php
 
 
-namespace App\Packages\User\Infrastructure\Spot;
+namespace App\Packages\User\Domain\Spot\DataAccessInterface;
 
 
-use App\packages\User\Domain\Spot\Spot;
+use App\Packages\User\Domain\Spot\Spot;
 
 interface RepositoryInterface
 {
-
     /**
      * 練習場所を登録
      * @param Spot $spot

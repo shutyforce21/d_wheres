@@ -5,6 +5,7 @@ namespace App\Packages\User\Infrastructure\Spot;
 
 
 use Illuminate\Support\Facades\Storage;
+use App\Packages\User\Domain\Spot\DataAccessInterface\FileRepositoryInterface;
 
 class FileRepository implements FileRepositoryInterface
 {

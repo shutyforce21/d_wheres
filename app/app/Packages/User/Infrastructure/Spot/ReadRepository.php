@@ -4,12 +4,11 @@
 namespace App\Packages\User\Infrastructure\Spot;
 
 use App\Models\Spot as SpotModel;
-use App\Packages\Shared\Service\ImagePath;
 use App\Packages\User\Domain\Spot\ReadModel\ReadSpot;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadAvailableTime;
 use App\Packages\User\Domain\Spot\ReadModel\ValueObject\ReadLocation;
-use App\Packages\User\Domain\Spot\Spot;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Packages\User\Domain\Spot\DataAccessInterface\ReadRepositoryInterface;
 
 class ReadRepository implements ReadRepositoryInterface
 {
@@ -37,7 +36,6 @@ class ReadRepository implements ReadRepositoryInterface
     public function get()
     {
         $rows = $this->spotModel->get();
-
         if ($rows->isNotEmpty()) {
             foreach ($rows as $row) {
                 $spot = ReadSpot::reconstructForPart(

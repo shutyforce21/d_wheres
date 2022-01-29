@@ -5,6 +5,7 @@ namespace App\Packages\User\Infrastructure\Spot;
 
 
 use App\Models\Spot as SpotModel;
+use App\Packages\User\Domain\Spot\DataAccessInterface\RepositoryInterface;
 use App\packages\User\Domain\Spot\Spot;
 use Illuminate\Support\Facades\DB;
 

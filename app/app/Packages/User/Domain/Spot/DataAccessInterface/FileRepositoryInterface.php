@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Packages\User\Infrastructure\Spot;
+namespace App\Packages\User\Domain\Spot\DataAccessInterface;
 
 
 interface FileRepositoryInterface
