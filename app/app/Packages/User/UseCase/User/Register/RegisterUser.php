@@ -4,8 +4,8 @@
 namespace App\Packages\User\UseCase\User\Register;
 
 
+use App\Packages\User\Domain\User\DataAccessInterface\RepositoryInterface;
 use App\Packages\User\Domain\User\UserFactory;
-use App\Packages\User\Infrastructure\User\RepositoryInterface;
 use App\Packages\User\UseCase\User\Register\Dto\InputData;
 
 class RegisterUser

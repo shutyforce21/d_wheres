@@ -5,6 +5,7 @@ namespace App\Packages\User\Infrastructure\User;
 
 use App\Models\User as UserModel;
 use App\Models\Profile as ProfileModel;
+use App\Packages\User\Domain\User\DataAccessInterface\ReadRepositoryInterface;
 use App\Packages\User\Domain\User\ReadModel\ChildEntity\ReadProfile;
 use App\Packages\User\Domain\User\ReadModel\ReadUser;
 

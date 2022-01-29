@@ -2,7 +2,8 @@
 
 namespace App\Packages\User\UseCase\Spot\Show;
 
-use App\Packages\User\Infrastructure\Spot\ReadRepositoryInterface;
+
+use App\Packages\User\Domain\Spot\DataAccessInterface\ReadRepositoryInterface;
 
 class ShowSpot
 {

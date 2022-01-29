@@ -2,7 +2,8 @@
 
 namespace App\Packages\User\UseCase\User\Follow;
 
-use App\Packages\User\Infrastructure\User\RepositoryInterface;
+
+use App\Packages\User\Domain\User\DataAccessInterface\RepositoryInterface;
 
 class FollowUser
 {

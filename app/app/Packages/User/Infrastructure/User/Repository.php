@@ -7,6 +7,7 @@ namespace App\Packages\User\Infrastructure\User;
 use App\Models\User as UserModel;
 use App\Models\Profile as ProfileModel;
 use App\Packages\User\Domain\User\ChildEntity\Profile;
+use App\Packages\User\Domain\User\DataAccessInterface\RepositoryInterface;
 use App\Packages\User\Domain\User\User;
 use Illuminate\Support\Facades\DB;
 

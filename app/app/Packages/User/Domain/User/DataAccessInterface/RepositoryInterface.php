@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Packages\User\Infrastructure\User;
+
+namespace App\Packages\User\Domain\User\DataAccessInterface;
+
 
 use App\Packages\User\Domain\User\User;
 

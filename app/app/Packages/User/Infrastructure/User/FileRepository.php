@@ -2,6 +2,7 @@
 
 namespace App\Packages\User\Infrastructure\User;
 
+use App\Packages\User\Domain\User\DataAccessInterface\FileRepositoryInterface;
 use Illuminate\Support\Facades\Storage;
 
 class FileRepository implements FileRepositoryInterface

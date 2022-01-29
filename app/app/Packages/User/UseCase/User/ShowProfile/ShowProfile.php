@@ -2,7 +2,8 @@
 
 namespace App\Packages\User\UseCase\User\ShowProfile;
 
-use App\Packages\User\Infrastructure\User\ReadRepositoryInterface;
+
+use App\Packages\User\Domain\User\DataAccessInterface\ReadRepositoryInterface;
 
 class ShowProfile
 {

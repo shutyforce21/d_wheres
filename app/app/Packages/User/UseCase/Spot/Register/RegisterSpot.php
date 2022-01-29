@@ -2,11 +2,9 @@
 
 namespace App\Packages\User\UseCase\Spot\Register;
 
-use App\packages\User\Domain\Spot\Spot;
+use App\Packages\User\Domain\Spot\DataAccessInterface\FileRepositoryInterface;
+use App\Packages\User\Domain\Spot\DataAccessInterface\RepositoryInterface;
 use App\Packages\User\Domain\Spot\SpotFactory;
-use App\packages\User\Domain\Spot\ValueObject\GeometricLocation;
-use App\Packages\User\Infrastructure\Spot\FileRepositoryInterface;
-use App\packages\User\Infrastructure\Spot\RepositoryInterface;
 use App\packages\User\UseCase\Spot\Register\Dto\InputData;
 
 class RegisterSpot

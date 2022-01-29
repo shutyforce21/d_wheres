@@ -2,17 +2,17 @@
 
 namespace App\Providers;
 
+use App\Packages\User\Domain\Spot\DataAccessInterface\FileRepositoryInterface as SpotFileRepositoryInterface;
+use App\Packages\User\Domain\Spot\DataAccessInterface\ReadRepositoryInterface as SpotReadRepositoryInterface;
+use App\Packages\User\Domain\Spot\DataAccessInterface\RepositoryInterface as SpotRepositoryInterface;
+use App\Packages\User\Domain\User\DataAccessInterface\FileRepositoryInterface as UserFileRepositoryInterface;
+use App\Packages\User\Domain\User\DataAccessInterface\ReadRepositoryInterface as UserReadRepositoryInterface;
+use App\Packages\User\Domain\User\DataAccessInterface\RepositoryInterface as UserRepositoryInterface;
 use App\Packages\User\Infrastructure\Spot\FileRepository as SpotFileRepository;
-use App\Packages\User\Infrastructure\Spot\FileRepositoryInterface as SpotFileRepositoryInterface;
 use App\packages\User\Infrastructure\Spot\Repository as SpotRepository;
-use App\packages\User\Infrastructure\Spot\RepositoryInterface as SpotRepositoryInterface;
-use App\Packages\User\Infrastructure\Spot\ReadRepositoryInterface as SpotReadRepositoryInterface;
 use App\Packages\User\Infrastructure\Spot\ReadRepository as SpotReadRepository;
 use App\Packages\User\Infrastructure\User\ReadRepository as UserReadRepository;
-use App\Packages\User\Infrastructure\User\ReadRepositoryInterface as UserReadRepositoryInterface;
 use App\Packages\User\Infrastructure\User\Repository as UserRepository;
-use App\Packages\User\Infrastructure\User\RepositoryInterface as UserRepositoryInterface;
-use App\Packages\User\Infrastructure\User\FileRepositoryInterface as UserFileRepositoryInterface;
 use App\Packages\User\Infrastructure\User\FileRepository as UserFileRepository;
 
 use Illuminate\Support\ServiceProvider;

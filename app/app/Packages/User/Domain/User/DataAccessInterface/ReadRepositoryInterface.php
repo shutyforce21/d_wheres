@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Packages\User\Infrastructure\User;
+namespace App\Packages\User\Domain\User\DataAccessInterface;
 
 
 use App\Packages\User\Domain\User\ReadModel\ReadUser;
@@ -14,4 +14,5 @@ interface ReadRepositoryInterface
      * @throws \Exception
      */
     public function findById($userId);
+
 }

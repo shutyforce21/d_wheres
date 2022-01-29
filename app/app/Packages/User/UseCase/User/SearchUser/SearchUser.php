@@ -3,8 +3,7 @@
 
 namespace App\Packages\User\UseCase\User\SearchUser;
 
-
-use App\Packages\User\Infrastructure\User\ReadRepositoryInterface;
+use App\Packages\User\Domain\User\DataAccessInterface\ReadRepositoryInterface;
 
 class SearchUser
 {

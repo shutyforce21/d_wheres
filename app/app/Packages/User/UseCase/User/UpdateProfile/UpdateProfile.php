@@ -2,9 +2,8 @@
 
 namespace App\Packages\User\UseCase\User\UpdateProfile;
 
-use App\Packages\User\Domain\User\ChildEntity\Profile;
-use App\Packages\User\Infrastructure\User\FileRepositoryInterface;
-use App\Packages\User\Infrastructure\User\RepositoryInterface;
+use App\Packages\User\Domain\User\DataAccessInterface\FileRepositoryInterface;
+use App\Packages\User\Domain\User\DataAccessInterface\RepositoryInterface;
 use App\Packages\User\UseCase\User\UpdateProfile\Dto\InputData;
 
 class UpdateProfile
