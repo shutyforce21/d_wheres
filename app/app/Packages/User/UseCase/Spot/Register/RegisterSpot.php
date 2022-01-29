@@ -23,7 +23,11 @@ class RegisterSpot
         $this->fileRepository = $fileRepository;
     }
 
-    public function handle(InputData $inputData, $userId)
+    /**
+     * @param InputData $inputData
+     * @param $userId
+     */
+    public function __invoke(InputData $inputData, $userId)
     {
         //spotEntity新規作成Factory
         $spot = SpotFactory::create($inputData);

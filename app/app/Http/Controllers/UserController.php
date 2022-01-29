@@ -24,7 +24,7 @@ class UserController extends Controller
         $authId = Auth::id();
 
         try {
-            $useCase->handle($authId, $followedId);
+            $useCase($authId, $followedId);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK
@@ -48,7 +48,7 @@ class UserController extends Controller
         $authId = Auth::id();
 
         try {
-            $useCase->handle($authId, $followedId);
+            $useCase($authId, $followedId);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK

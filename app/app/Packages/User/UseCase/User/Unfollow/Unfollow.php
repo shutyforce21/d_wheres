@@ -18,7 +18,7 @@ class Unfollow
      * @param $followedId
      * @throws \Exception
      */
-    public function handle($authId, $followedId)
+    public function __invoke($authId, $followedId)
     {
         $user = $this->repository->findById($authId);
         $user->unfollow($followedId);

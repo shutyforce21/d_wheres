@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $authId = Auth::id();
         try {
             $inputData = $request->getInputData();
-            $useCase->handle($inputData, $authId);
+            $useCase($inputData, $authId);
 
             return response()->json(
                 ['message' => 'success'],
@@ -44,7 +44,7 @@ class ProfileController extends Controller
     {
         $authId = Auth::id();
         try {
-            $outputData = $useCase->handle($authId, $userId);
+            $outputData = $useCase($authId, $userId);
             return response()->json(
                 [
                     'message' => 'success',

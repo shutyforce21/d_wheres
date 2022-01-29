@@ -21,7 +21,7 @@ class RegisterUser
      * @param InputData $inputData
      * @throws \Exception
      */
-    public function handle(InputData $inputData)
+    public function __invoke(InputData $inputData)
     {
         $userEntity = UserFactory::create($inputData);
         $this->repository->save($userEntity);

@@ -26,7 +26,7 @@ class UpdateProfile
      * @param $userId
      * @throws \Exception
      */
-    public function handle(InputData $inputData, $userId)
+    public function __invoke(InputData $inputData, $userId)
     {
         //userEntityを呼び出す
         $userEntity = $this->repository->findById($userId);

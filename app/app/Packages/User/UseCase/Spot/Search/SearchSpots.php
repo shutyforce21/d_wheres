@@ -14,7 +14,10 @@ class SearchSpots
         $this->readRepository = $readRepository;
     }
 
-    public function handle()
+    /**
+     * @return array
+     */
+    public function __invoke()
     {
         $outputData = $this->readRepository->all();
         return $outputData;

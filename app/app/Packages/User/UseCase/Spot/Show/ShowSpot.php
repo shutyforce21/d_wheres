@@ -13,7 +13,11 @@ class ShowSpot
         $this->readRepository = $readRepository;
     }
 
-    public function handle($spotId)
+    /**
+     * @param $spotId
+     * @return \App\Packages\User\Domain\Spot\ReadModel\ReadSpot
+     */
+    public function __invoke($spotId)
     {
         $outputData = $this->readRepository->findById($spotId);
         return $outputData;

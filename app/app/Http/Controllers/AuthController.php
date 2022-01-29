@@ -20,7 +20,7 @@ class AuthController extends Controller
     {
         $inputData = $request->getInputData();
         try {
-            $useCase->handle($inputData);
+            $useCase($inputData);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK);
@@ -76,7 +76,8 @@ class AuthController extends Controller
      * tokenが認証済みかどうか
      * @return \Illuminate\Http\JsonResponse
      */
-    public function isAuthenticated() {
+    public function isAuthenticated()
+    {
         return response()->json(
             ['message' => 'success'],
             Response::HTTP_OK);

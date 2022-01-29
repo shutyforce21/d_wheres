@@ -22,11 +22,11 @@ class SpotController extends Controller
     public function search(SearchSpots $useCase)
     {
         try {
-            $outputData = $useCase->handle();
+            $outputData = $useCase();
             return response()->json(
                 [
                     'message' => 'success',
-                    'data' => SpotResource::collection($outputData)
+                    'data' => SpotResource::collectionForSearch($outputData)
                 ],
                 Response::HTTP_OK
             );
@@ -46,7 +46,7 @@ class SpotController extends Controller
     public function index(GetSpots $useCase)
     {
         try {
-            $outputData = $useCase->handle();
+            $outputData = $useCase();
             return response()->json(
                 [
                     'message' => 'success',
@@ -73,7 +73,7 @@ class SpotController extends Controller
         $userId = Auth::id();
         $inputData = $request->getInputData();
         try {
-            $useCase->handle($inputData, $userId);
+            $useCase($inputData, $userId);
             return response()->json(
                 ['message' => 'success'],
                 Response::HTTP_OK
@@ -95,7 +95,7 @@ class SpotController extends Controller
     public function show($spotId, ShowSpot $useCase)
     {
         try {
-            $outputData = $useCase->handle($spotId);
+            $outputData = $useCase($spotId);
             return response()->json(
                 [
                     'message' => 'success',

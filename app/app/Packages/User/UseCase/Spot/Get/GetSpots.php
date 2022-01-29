@@ -15,7 +15,10 @@ class GetSpots
         $this->readRepository = $readRepository;
     }
 
-    public function handle()
+    /**
+     * @return array
+     */
+    public function __invoke()
     {
         $outputData = $this->readRepository->get();
         return $outputData;

@@ -19,7 +19,7 @@ class ShowProfile
      * @return \App\Packages\User\Domain\User\ReadModel\ReadUser
      * @throws \Exception
      */
-    public function handle($authId, $userId)
+    public function __invoke($authId, $userId)
     {
         $readUserEntity = $this->readRepository->findById($userId);
         // 自分自身のプロフィールを取得した場合
