@@ -16,9 +16,9 @@ class SearchUser
         $this->readRepository = $readRepository;
     }
 
-    public function handle()
+    public function __invoke()
     {
-
+        return [];
     }
 
 }

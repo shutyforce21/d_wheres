@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Requests;
 
 use App\Packages\User\UseCase\User\UpdateProfile\Dto\InputData;
@@ -8,10 +7,8 @@ use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule;
 
-class UpdateUserProfileRequest extends FormRequest
+class SearchUserRequest extends FormRequest
 {
     /**
      * @return array|string[]
@@ -27,7 +24,6 @@ class UpdateUserProfileRequest extends FormRequest
             'genres' => 'ジャンル',
         ];
     }
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -45,38 +41,19 @@ class UpdateUserProfileRequest extends FormRequest
      */
     public function rules()
     {
-        // 変更がない場合は文字列を返す。
-        if(is_object($this->all()['image']) === true) {
-            $imageFileValidation = ['required', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'];
-        } else {
-            $imageFileValidation = ['nullable', 'string'];
-        }
-
-        // 変更がない場合は文字列を返す。
-        if(is_object($this->all()['background']) === true) {
-            $backgroundFileValidation = ['required', 'file', 'image', 'max:512', 'mimes:jpeg,jpg,png'];
-        } else {
-            $backgroundFileValidation = ['nullable', 'string'];
-        }
-
         return [
-            'background' => $backgroundFileValidation,
-            'image' => $imageFileValidation,
+            'background' => ['required', 'string'],
+            'image' => ['required', 'string'],
             'name' => ['required', 'string'],
-            'user_code' => ['required', 'string', Rule::unique('profiles','user_code')->ignore(Auth::id())],
-            'biography' => ['nullable', 'string'],
-            'genres' => ['nullable', 'array'],
-            'genres.*' => ['integer', 'exists:genres,id'],
+            'user_code' => ['required', 'string'],
+            'biography' => ['required', 'string'],
+            'genres' => ['required', 'string'],
         ];
     }
 
-    public function messages()
-    {
-        return [
-            // 'last_name.string' => ':attributeは文字列を指定してください。',
-        ];
-    }
-
+    /**
+     * @param ValidationValidator $validator
+     */
     protected function failedValidation(ValidationValidator $validator)
     {
         $name = $this->attributes();
