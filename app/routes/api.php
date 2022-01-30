@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\SpotController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -25,12 +26,13 @@ Route::middleware('auth:users')->group(function() {
     Route::resource('/spots', SpotController::class)->only(['store']);
 });
 
-//ゲスト&認証ユーザーのみ
-Route::get('/spots', [SpotController::class, 'index']);
-Route::get('/spots/{spot_id}', [SpotController::class, 'show']);
+//ゲスト&認証ユーザー
+Route::resource('/spots', SpotController::class)->only(['index', 'show']);
 Route::get('/spots/search', [SpotController::class, 'search']);
 
-Route::resource('/users', \App\Http\Controllers\UserController::class)->only(['index']);
+Route::resource('/users', UserController::class)->only(['index']);
+Route::get('/users/search', [UserController::class, 'search']);
+
 // 新規登録
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 // ログイン

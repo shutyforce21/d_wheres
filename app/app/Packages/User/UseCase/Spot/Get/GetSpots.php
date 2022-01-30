@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Packages\User\UseCase\Spot\Get;
-
 
 
 use App\Packages\User\Domain\Spot\DataAccessInterface\ReadRepositoryInterface;
