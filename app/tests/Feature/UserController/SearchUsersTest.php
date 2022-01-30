@@ -13,7 +13,7 @@ class SearchUsersTest extends TestCase
      */
     public function 「正常系」ユーザーを検索する（パラメータなし）()
     {
-        $response = $this->get("/api/users");
+        $response = $this->get("/api/users/search");
         $response->assertSuccessful();
 
         $response->assertJsonStructure(
