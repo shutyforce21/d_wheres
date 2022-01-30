@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\Feature\SpotController;
-
 
 use Tests\TestCase;
 
