@@ -12,7 +12,8 @@ class SpotController
      */
     public function index()
     {
-        return 'asdf';
+        $spots = [1,2,3,4,5];
+        return view('admin.spot.index')->with(["spots" => $spots]);
     }
 
     /**
