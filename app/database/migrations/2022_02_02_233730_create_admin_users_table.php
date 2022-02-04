@@ -22,7 +22,6 @@ class CreateAdminUsersTable extends Migration
             $table->timestamps();
         });
 
-        // TODO https://webty.jp/staffblog/production/post-3917/
     }
 
     /**
