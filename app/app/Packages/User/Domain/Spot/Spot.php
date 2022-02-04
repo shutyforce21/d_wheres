@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Packages\User\Domain\Spot;
-
 
 use App\Packages\User\Domain\Spot\ValueObject\AvailableTime;
 use App\packages\User\Domain\Spot\ValueObject\GeometricLocation;
