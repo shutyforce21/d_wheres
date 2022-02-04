@@ -10,6 +10,7 @@ class SampleDataSeeder extends Seeder
 {
     public function run()
     {
+        // ユーザー
         DB::table('users')->insert([
             [
                 'code' => 'a1s2d3f1001',
@@ -34,6 +35,7 @@ class SampleDataSeeder extends Seeder
             ],
         ]);
 
+        // ユーザーのプロフィール
         DB::table('profiles')->insert([
             [
                 'user_id' => 1,
@@ -44,7 +46,7 @@ class SampleDataSeeder extends Seeder
                 'biography' => "Thank you coming my page!!\nThis is my dance profile and I like HipHop, Breakin"
             ]
         ]);
-
+        // ユーザーのプロフィール
         DB::table('profiles')->insert([
             [
                 'user_id' => 2,
@@ -65,12 +67,14 @@ class SampleDataSeeder extends Seeder
             ]
         ]);
 
+        // ユーザーのダンスジャンル
         DB::table('user_genre')->insert([
             ['user_id' => 1, 'genre_id' => 1],
             ['user_id' => 1, 'genre_id' => 2],
             ['user_id' => 1, 'genre_id' => 3],
         ]);
 
+        // フォロー
         DB::table('follows')->insert([
             ['follower_id' => 1, 'followed_id' => 2],
             ['follower_id' => 1, 'followed_id' => 3],
@@ -86,6 +90,7 @@ class SampleDataSeeder extends Seeder
             ['follower_id' => 4, 'followed_id' => 3],
         ]);
 
+        // スポット
         for ($i=1;$i<50;$i++) {
             $f = 0.001;
             $lng = 139.69238 + $f * $i;
@@ -100,9 +105,26 @@ class SampleDataSeeder extends Seeder
                 'location' => DB::raw("ST_GeomFromText('POINT({$lng} {$lat})')"),
                 'open_on' => '12:23:45',
                 'close_on' => '12:23:45',
-                'create_user_id' => rand(1,2)
-            ] ;
+                'create_user_id' => rand(1,2),
+                'active' => true
+            ];
         }
+
+        // 管理者が有効化していないスポット追加
+        $spots[] = [
+            'code' => 'asdfasdf123499',
+            'name' => '池袋駅東口99',
+            'image' => '/image/sample/spot.jpg',
+            'prefecture_id' => rand(1,2),
+            'address' => '東京都仮町区1-2-1 dwheresタワー 1F',
+            'content' => 'こちらに練習場所の詳細を記載できます。',
+            'location' => DB::raw("ST_GeomFromText('POINT(139.6923899 35.6893544)')"),
+            'open_on' => '12:23:45',
+            'close_on' => '12:23:45',
+            'create_user_id' => rand(1,2),
+            'active' => false
+        ];
+
         DB::table('spots')->insert($spots);
     }
 
