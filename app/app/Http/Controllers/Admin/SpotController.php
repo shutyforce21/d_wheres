@@ -20,7 +20,7 @@ class SpotController
      * 有効化
      * @return string
      */
-    public function activate()
+    public function activate($spotId)
     {
         return 'asdf';
     }
@@ -29,7 +29,7 @@ class SpotController
      * 無効化
      * @return string
      */
-    public function inactivate()
+    public function inactivate($spotId)
     {
         return 'asdf';
     }
