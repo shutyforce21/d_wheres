@@ -10,6 +10,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/admin/spots', [\App\Http\Controllers\Admin\SpotController::class, 'index']);
-Route::get('/admin/spots/activate', [\App\Http\Controllers\Admin\SpotController::class, 'activate']);
-Route::get('/admin/spots/inactivate', [\App\Http\Controllers\Admin\SpotController::class, 'inactivate']);
+Route::get('/admin/spots/{spot_id}/activate', [\App\Http\Controllers\Admin\SpotController::class, 'activate']);
+Route::get('/admin/spots/{spot_id}/inactivate', [\App\Http\Controllers\Admin\SpotController::class, 'inactivate']);
 
