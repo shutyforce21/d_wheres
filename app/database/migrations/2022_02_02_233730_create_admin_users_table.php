@@ -17,7 +17,6 @@ class CreateAdminUsersTable extends Migration
             $table->id();
             $table->string('email')->unique()->comment('メールアドレス');
             $table->string('password');
-            $table->string('role')->comment('権限');
             $table->rememberToken();
             $table->timestamps();
         });
