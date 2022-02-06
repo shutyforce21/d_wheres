@@ -22,6 +22,7 @@ class SpotController
      */
     public function activate($spotId)
     {
+        dd("adsf");
         return 'asdf';
     }
 

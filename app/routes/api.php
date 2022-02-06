@@ -58,8 +58,7 @@ Route::middleware('auth:users')->group(function() {
 });
 
 Route::get('s', function() {
-    $role = \App\Enums\RoleType::Administrator;
-    dd($role);
+
 });
 
 ?>
