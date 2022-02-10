@@ -37,8 +37,21 @@ Route::get('/users/search', [UserController::class, 'search']);
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 // ログイン
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+
+//自動ログイン
+if (env('APP_ENV') === 'local') {
+    \Illuminate\Support\Facades\Auth::login(\App\Models\User::find(1));
+}
+
 // 認証ルート
 Route::middleware('auth:users')->group(function() {
+
+    //メッセージ機能
+    Route::get('message', function () {
+        $user = \Illuminate\Support\Facades\Auth::user();
+        dd($user);
+    });
+
     // ログアウト
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     //tokenが認証済みかどうか(api通信が無いページ用)

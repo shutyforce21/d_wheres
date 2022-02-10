@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->group(function () {
     //TODO csrf_tokenがmatchしていない！！
     // karnel/verfyCrsfToken->tokensMatchがおかしい
+
     Route::get('/v-login', function () {
         return view('admin.login');
     });
+
     Route::post('/login', [\App\Http\Controllers\Admin\AuthController::class, 'login'])->name('admin.login');
     Route::get('/spots', [\App\Http\Controllers\Admin\SpotController::class, 'index']);
 
