@@ -31,7 +31,12 @@ class ActivateSpotTest extends TestCase
      */
     public function 「正常系」総合管理者がスポットを有効化する()
     {
-        $inactiveSpotId = 41;
+
+
+        //TODO Attempt to read property "active" on null
+
+
+        $inactiveSpotId = 50;
         $inactiveSpot = Spot::find($inactiveSpotId);
 
         //有効フラグがfalse

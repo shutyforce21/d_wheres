@@ -14,20 +14,19 @@ class UserController extends Controller
 
     public function search(Request $request, SearchUser $useCase)
     {
-//        try {
+        try {
             $outputData = $useCase();
-            dd($outputData);
-//            return response()->json(
-//                ['message' => 'success'],
-//                Response::HTTP_OK
-//            );
-
-//        } catch (\Throwable $throwable) {
-//            return response()->json(
-//                ['message' => $throwable->getMessage()],
-//                Response::HTTP_INTERNAL_SERVER_ERROR
-//            );
-//        }
+            return response()->json(
+                ['message' => 'success'],
+                Response::HTTP_OK
+            );
+//
+        } catch (\Throwable $throwable) {
+            return response()->json(
+                ['message' => $throwable->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**
