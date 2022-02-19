@@ -44,29 +44,6 @@ class Spot
         return $self;
     }
 
-    /**
-     * 有効化
-     * @throws \Exception
-     */
-    public function activate()
-    {
-        if ($this->getActiveFlag() === self::ACTIVE) {
-            throw new \Exception('既に有効化されています。');
-        }
-        $this->isActive = self::ACTIVE;
-    }
-
-    /**
-     * 無効化
-     * @throws \Exception
-     */
-    public function inactivate()
-    {
-        if ($this->getActiveFlag() === self::INACTIVE) {
-            throw new \Exception('既に無効化されています。');
-        }
-        $this->isActive = self::INACTIVE;
-    }
 
     /**
      * @param string|null $image

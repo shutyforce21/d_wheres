@@ -4,6 +4,10 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Packages\Admin\UseCase\Spot\Activate\ActivateSpot;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+
 class SpotController
 {
     /**
@@ -20,10 +24,20 @@ class SpotController
      * 有効化
      * @return string
      */
-    public function activate($spotId)
+    public function activate($spotId, ActivateSpot $usecase)
     {
-        dd("adsf");
-        return 'asdf';
+        try {
+            $usecase($spotId);
+            return response()->json(
+                ['message' => 'success'],
+                Response::HTTP_OK
+            );
+        } catch(\Throwable $e) {
+            return response()->json(
+                ['message' => $e->getMessage()],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 
     /**
