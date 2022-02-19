@@ -40,12 +40,6 @@ if (env('APP_ENV') === 'local') {
 // 認証ルート
 Route::middleware('auth:users')->group(function() {
 
-    //メッセージ機能
-    Route::get('message', function () {
-        $user = \Illuminate\Support\Facades\Auth::user();
-        dd($user);
-    });
-
     // ログアウト
     Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
     //tokenが認証済みかどうか(api通信が無いページ用)
@@ -65,6 +59,8 @@ Route::middleware('auth:users')->group(function() {
     // spotリソース
     Route::resource('/spots', SpotController::class)->only(['store']);
 });
+
+Route::put('s/{spot_id}', [\App\Http\Controllers\Admin\SpotController::class, 'activate']);
 
 ?>
 
