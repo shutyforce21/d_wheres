@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Packages\User\Domain\Spot\Spot;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,16 +12,16 @@ class SpotRegisterEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $spot;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct(Spot $spot)
     {
-        $this->data = $data;
+        $this->spot = $spot;
     }
 
     /**
@@ -30,6 +31,8 @@ class SpotRegisterEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this->from(config('mail.from.address'))
+            ->subject(config('mail.subject.register_spot'))
+            ->view('mails.registerSpot.to_admin');
     }
 }

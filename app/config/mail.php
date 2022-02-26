@@ -96,6 +96,10 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'subject' => [
+        'register_spot' => 'Registered new Spot.'
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
