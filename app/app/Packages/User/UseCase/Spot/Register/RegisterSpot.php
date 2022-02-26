@@ -2,6 +2,7 @@
 
 namespace App\Packages\User\UseCase\Spot\Register;
 
+use App\Jobs\SendSpotRegisterEmail;
 use App\Packages\User\Domain\Spot\DataAccessInterface\FileRepositoryInterface;
 use App\Packages\User\Domain\Spot\DataAccessInterface\RepositoryInterface;
 use App\Packages\User\Domain\Spot\SpotFactory;
@@ -41,5 +42,7 @@ class RegisterSpot
         }
         //保存
         $this->repository->save($spot, $userId);
+        //メール送信(Queue)
+        SendSpotRegisterEmail::dispatch($spot);
     }
 }
