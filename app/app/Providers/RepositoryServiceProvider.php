@@ -15,6 +15,7 @@ use App\Packages\User\Infrastructure\User\ReadRepository as UserReadRepository;
 use App\Packages\User\Infrastructure\User\Repository as UserRepository;
 use App\Packages\User\Infrastructure\User\FileRepository as UserFileRepository;
 
+use App\Services\Interfaces\RedisService;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
