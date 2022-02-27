@@ -72,6 +72,7 @@ class SpotController extends Controller
     {
         $userId = Auth::id();
         $inputData = $request->getInputData();
+
         try {
             $useCase($inputData, $userId);
             return response()->json(
@@ -80,6 +81,7 @@ class SpotController extends Controller
             );
 
         } catch(Throwable $e) {
+            logger()->info($e->getMessage());
             return response()->json(
                 ['message' => $e->getMessage()],
                 Response::HTTP_INTERNAL_SERVER_ERROR
