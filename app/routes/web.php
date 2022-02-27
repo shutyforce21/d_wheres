@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::get('redis1', [\App\Http\Controllers\RedisController::class, 'redis1']);
+Route::get('redis2', [\App\Http\Controllers\RedisController::class, 'redis2']);
+
 Route::prefix('admin')->group(function () {
     //TODO csrf_tokenがmatchしていない！！
     // karnel/verfyCrsfToken->tokensMatchがおかしい
@@ -25,6 +28,14 @@ Route::prefix('admin')->group(function () {
         Route::get('/spots/{spot_id}/activate', [\App\Http\Controllers\Admin\SpotController::class, 'activate']);
         Route::get('/spots/{spot_id}/inactivate', [\App\Http\Controllers\Admin\SpotController::class, 'inactivate']);
 //    });
+});
+
+Route::get('s', function () {
+//    $redis = new \Illuminate\Support\Facades\Redis();
+    $redis = new Redis();
+    $redis->connect('redis', 6379);
+//    $redis->set('key', 'value', 10);
+    dd($redis->get('key'));
 });
 
 

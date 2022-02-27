@@ -33,9 +33,9 @@ Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
 
 //自動ログイン
-if (env('APP_ENV') === 'local') {
-    \Illuminate\Support\Facades\Auth::login(\App\Models\User::find(1));
-}
+//if (env('APP_ENV') === 'local') {
+//    \Illuminate\Support\Facades\Auth::login(\App\Models\User::find(1));
+//}
 
 // 認証ルート
 Route::middleware('auth:users')->group(function() {
