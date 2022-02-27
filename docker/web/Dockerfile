@@ -9,3 +9,5 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 
 RUN mv /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled
 RUN /bin/sh -c a2enmod rewrite
+RUN git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis && \
+  docker-php-ext-install redis
